@@ -1,1 +1,2289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-theme-mode="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>de Beaumont Foundation — Strengthening public health. Advancing healthier communities.</title>
+<meta name="description" content="The de Beaumont Foundation advances policy, builds partnerships, and strengthens public health to create communities where people can achieve their best possible health.">
+<meta name="theme-color" content="#1B1044">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   de Beaumont Foundation — homepage
+   Design language: Montreal Canadiens Children's Foundation
+   (full-bleed motion hero, oversized stat rail, rounded editorial
+   cards, single strong accent, generous air)
+   Brand tokens: de Beaumont palette (deep purple / accent blue / mint)
+   ============================================================ */
 
+/* ---------- 1. TOKENS ---------- */
+:root{
+  /* brand ramp */
+  --p-900:#1B1044; --p-800:#2C1A6B; --p-700:#4B2E83; --p-500:#6D5ACF; --p-050:#E9E6FA;
+  --blue-600:#3A3FD4; --blue-500:#5A61F6; --blue-300:#8FA0FF;
+  --mint-400:#A7D6CD; --mint-200:#D9EFEA;
+  /* vibrancy set */
+  --coral:#FF6A4D; --coral-ink:#2A0D04;
+  --amber:#FFC24B; --amber-ink:#2B1E00;
+  --rose:#F58FBF;  --rose-ink:#2E0A1E;
+  --n-900:#0B0A14; --n-800:#2C2C3A; --n-600:#5B5B70; --n-300:#E6E6EC; --n-100:#F5F5F8;
+
+  /* semantic — light theme */
+  --bg:#FFFFFF;
+  --bg-2:var(--n-100);
+  --bg-3:var(--p-050);
+  --surface:#FFFFFF;
+  --text:var(--n-900);
+  --text-2:#4A4A5E;
+  --line:rgba(27,16,68,.16);
+  --line-strong:rgba(27,16,68,.34);
+  --brand-bg:var(--p-900);
+  --brand-bg-2:var(--p-800);
+  --brand-fg:#FFFFFF;
+  --link:var(--blue-600);
+  --accent:var(--blue-500);
+  --accent-line:var(--blue-500);
+  --mint:var(--mint-400);
+  --mint-soft:var(--mint-200);
+  --chip-bg:#FFFFFF;
+  --shadow-1:0 1px 2px rgba(11,10,20,.06), 0 8px 24px -12px rgba(27,16,68,.22);
+  --shadow-2:0 2px 6px rgba(11,10,20,.08), 0 26px 60px -28px rgba(27,16,68,.38);
+  --focus:var(--blue-600);
+
+  /* geometry & rhythm */
+  --r-sm:10px; --r-md:16px; --r-lg:26px; --r-xl:38px; --r-pill:999px;
+  --gutter:clamp(18px, 4vw, 56px);
+  --maxw:1320px;
+  --sect-y:clamp(56px, 8vw, 128px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur:.55s;
+  --header-h:76px;
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#0B0A14;
+  --bg-2:#131024;
+  --bg-3:#1B1638;
+  --surface:#17142B;
+  --text:#F4F3F9;
+  --text-2:#BFBCD4;
+  --line:rgba(233,230,250,.20);
+  --line-strong:rgba(233,230,250,.42);
+  --brand-bg:#150E33;
+  --brand-bg-2:#221654;
+  --brand-fg:#FFFFFF;
+  --link:#A9B4FF;
+  --accent:#8FA0FF;
+  --accent-line:#8FA0FF;
+  --mint:#7FC3B6;
+  --mint-soft:#1F3F3B;
+  --chip-bg:#1B1734;
+  --shadow-1:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+  --shadow-2:0 2px 8px rgba(0,0,0,.55), 0 30px 70px -30px rgba(0,0,0,.9);
+  --focus:#A9B4FF;
+  --header-h:76px;
+  color-scheme:dark;
+}
+
+/* accessibility modes */
+html.a11y-gray #page-shell{ filter:grayscale(1) contrast(1.06); }
+html.a11y-gray.a11y-contrast #page-shell{ filter:grayscale(1) contrast(1.22); }
+html.a11y-contrast{ --text:#000; --text-2:#1a1a1a; --line:rgba(0,0,0,.7); --line-strong:#000; --link:#0000CC; }
+html.a11y-contrast[data-theme="dark"]{ --text:#fff; --text-2:#f0f0f0; --line:rgba(255,255,255,.75); --line-strong:#fff; --link:#B9C4FF; }
+html.a11y-contrast a{ text-decoration:underline !important; text-underline-offset:3px; }
+html.a11y-contrast .btn, html.a11y-contrast .chip, html.a11y-contrast .card{ outline:2px solid var(--line-strong); outline-offset:-2px; }
+html.a11y-links a:not(.btn){ text-decoration:underline !important; text-decoration-thickness:2px; text-underline-offset:3px; }
+html.fs-1{ font-size:112.5%; } html.fs-2{ font-size:125%; }
+html.a11y-space body{ letter-spacing:.02em; word-spacing:.12em; line-height:1.85; }
+html.a11y-space p, html.a11y-space li{ max-width:62ch; }
+
+html.no-motion *, html.no-motion *::before, html.no-motion *::after{
+  animation-duration:.001ms !important; animation-iteration-count:1 !important;
+  transition-duration:.001ms !important; scroll-behavior:auto !important;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ---------- 2. BASE ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 18px); -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size:1.0625rem; line-height:1.62; font-weight:400;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,svg,video{ display:block; max-width:100%; }
+h1,h2,h3,h4{ font-family:"Bricolage Grotesque", "Public Sans", sans-serif; font-weight:700; line-height:1.02; letter-spacing:-.028em; margin:0; }
+p{ margin:0 0 1em; }
+a{ color:var(--link); text-underline-offset:2px; }
+a:hover{ text-decoration-thickness:2px; }
+ul,ol{ margin:0; padding:0; list-style:none; }
+button{ font:inherit; color:inherit; }
+
+:focus-visible{ outline:3px solid var(--focus); outline-offset:3px; border-radius:4px; }
+::selection{ background:var(--p-500); color:#fff; }
+
+.wrap{ width:100%; max-width:calc(var(--maxw) + var(--gutter) * 2);
+  padding-inline:var(--gutter); margin-inline:auto; }
+.sect{ padding-block:var(--sect-y); position:relative; }
+.sr-only{ position:absolute!important; width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0; }
+
+/* skip links */
+.skips{ position:fixed; inset:0 auto auto 0; z-index:200; }
+.skips a{
+  position:absolute; top:-200px; left:12px; background:var(--p-900); color:#fff;
+  padding:12px 20px; border-radius:0 0 12px 12px; font-weight:600; text-decoration:none; white-space:nowrap;
+}
+.skips a:focus{ top:0; }
+
+/* type helpers */
+.eyebrow{
+  font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.75rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--text-2);
+  display:flex; align-items:center; gap:12px; margin:0 0 18px;
+}
+.eyebrow::before{ content:""; width:26px; height:2px; background:var(--accent-line); flex:none; }
+.eyebrow .num{ color:var(--accent); }
+.h-xl{ font-size:clamp(2.5rem, 6.6vw, 5.6rem); }
+.h-lg{ font-size:clamp(2rem, 4.4vw, 3.6rem); }
+.h-md{ font-size:clamp(1.5rem, 2.4vw, 2.2rem); }
+.h-sm{ font-size:clamp(1.18rem, 1.5vw, 1.4rem); letter-spacing:-.02em; }
+.lede{ font-size:clamp(1.06rem, 1.35vw, 1.32rem); color:var(--text-2); max-width:62ch; line-height:1.55; }
+.sect-head{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px 40px; align-items:end; margin-bottom:clamp(28px,4vw,56px); }
+.sect-head .lede{ margin-top:16px; }
+
+/* buttons */
+.btn{
+  --btn-bg:var(--p-900); --btn-fg:#fff; --btn-bd:var(--p-900);
+  display:inline-flex; align-items:center; gap:12px; justify-content:center;
+  min-height:52px; padding:14px 28px; border-radius:var(--r-pill);
+  background:var(--btn-bg); color:var(--btn-fg); border:2px solid var(--btn-bd);
+  font-weight:600; font-size:1rem; letter-spacing:-.01em; text-decoration:none; cursor:pointer;
+  transition:transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-1); }
+.btn:active{ transform:translateY(0); }
+.btn .arw{ transition:transform .35s var(--ease); }
+.btn:hover .arw{ transform:translateX(5px); }
+.btn--ghost{ --btn-bg:transparent; --btn-fg:var(--text); --btn-bd:var(--line-strong); }
+.btn--ghost:hover{ --btn-bg:var(--text); --btn-fg:var(--bg); --btn-bd:var(--text); }
+.btn--light{ --btn-bg:#fff; --btn-fg:var(--p-900); --btn-bd:#fff; }
+.btn--onbrand{ --btn-bg:transparent; --btn-fg:#fff; --btn-bd:rgba(255,255,255,.55); }
+.btn--onbrand:hover{ --btn-bg:#fff; --btn-fg:var(--p-900); --btn-bd:#fff; }
+.btn--mint{ --btn-bg:var(--mint-400); --btn-fg:#0B2B26; --btn-bd:var(--mint-400); }
+.btn--sm{ min-height:44px; padding:10px 20px; font-size:.94rem; }
+
+.textlink{
+  display:inline-flex; align-items:center; gap:9px; font-weight:600; text-decoration:none;
+  color:var(--link); border-bottom:2px solid currentColor; padding-bottom:2px;
+}
+.textlink .arw{ transition:transform .35s var(--ease); }
+.textlink:hover .arw{ transform:translateX(5px); }
+
+/* reveal on scroll */
+.rv{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+.rv.in{ opacity:1; transform:none; }
+.rv.d1{ transition-delay:.08s } .rv.d2{ transition-delay:.16s } .rv.d3{ transition-delay:.24s } .rv.d4{ transition-delay:.32s }
+
+/* ---------- 3. HEADER ---------- */
+.progress{ position:fixed; top:0; left:0; height:3px; width:100%; z-index:120; background:transparent; }
+.progress i{ display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--blue-500),var(--mint-400)); transition:width .1s linear; }
+
+.hdr{
+  position:sticky; top:0; z-index:100; background:var(--brand-bg); color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.hdr__in{ display:flex; align-items:center; gap:clamp(14px,2.4vw,40px); min-height:var(--header-h); }
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; flex:none; }
+.brand img{ height:34px; width:auto; }
+.brand__tag{ display:none; font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.72); border-left:1px solid rgba(255,255,255,.3); padding-left:12px; line-height:1.4; }
+@media (min-width:1180px){ .brand__tag{ display:block; } }
+
+.nav{ margin-left:auto; }
+.nav__list{ display:flex; align-items:center; gap:clamp(6px,1.2vw,14px); }
+.nav__list > li > a{
+  display:block; padding:10px 12px; border-radius:var(--r-pill); color:#fff; text-decoration:none;
+  font-weight:500; font-size:.98rem; white-space:nowrap;
+  transition:background .25s var(--ease), color .25s var(--ease);
+}
+.nav__list > li > a:hover, .nav__list > li > a[aria-current="page"]{ background:rgba(255,255,255,.14); }
+.hdr__tools{ display:flex; align-items:center; gap:8px; }
+
+.icon-btn{
+  display:inline-grid; place-items:center; width:46px; height:46px; border-radius:var(--r-pill);
+  background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22); color:#fff; cursor:pointer;
+  transition:background .25s var(--ease), transform .25s var(--ease);
+}
+.icon-btn:hover{ background:rgba(255,255,255,.24); transform:translateY(-1px); }
+.icon-btn svg{ width:20px; height:20px; }
+
+/* theme switch (segmented) */
+.themesw{ display:flex; align-items:center; gap:2px; padding:4px; border-radius:var(--r-pill); background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22); }
+.themesw button{
+  display:inline-grid; place-items:center; width:38px; height:38px; border:0; border-radius:var(--r-pill);
+  background:transparent; color:rgba(255,255,255,.8); cursor:pointer; transition:background .25s var(--ease), color .25s var(--ease);
+}
+.themesw button svg{ width:18px; height:18px; }
+.themesw button:hover{ background:rgba(255,255,255,.16); color:#fff; }
+.themesw button[aria-pressed="true"]{ background:#fff; color:var(--p-900); }
+.themesw__label{ display:none; }
+@media (min-width:1400px){ .themesw__label{ display:block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; padding-inline:8px 4px; color:rgba(255,255,255,.7);} }
+
+.theme-cycle{ display:none; }
+.drawer__theme{ display:flex; align-items:center; justify-content:space-between; gap:14px;
+  padding:0 4px 20px; border-bottom:1px solid rgba(255,255,255,.16); }
+.drawer__theme span{ font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.14em;
+  text-transform:uppercase; color:rgba(255,255,255,.72); }
+.drawer .themesw{ display:flex; }
+.burger{ display:none; }
+@media (max-width:1023px){
+  .nav{ display:none; }
+  .burger{ display:inline-grid; }
+}
+@media (max-width:900px){
+  .hdr .themesw{ display:none; }
+  .theme-cycle{ display:inline-grid; }
+  .brand img{ height:28px; }
+  .hdr__in{ gap:10px; }
+  .icon-btn{ width:44px; height:44px; }
+}
+
+/* mobile drawer */
+.drawer{
+  position:fixed; inset:0; z-index:150; background:var(--brand-bg); color:#fff;
+  transform:translateY(-100%); visibility:hidden; transition:transform .5s var(--ease), visibility .5s;
+  display:flex; flex-direction:column; overflow-y:auto; overscroll-behavior:contain;
+}
+.drawer[data-open="true"]{ transform:none; visibility:visible; }
+.drawer__top{ display:flex; align-items:center; justify-content:space-between; min-height:var(--header-h); padding-inline:var(--gutter); border-bottom:1px solid rgba(255,255,255,.16); }
+.drawer__body{ padding:26px var(--gutter) 48px; }
+.drawer__body a{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 4px; color:#fff; text-decoration:none; font-family:"Bricolage Grotesque",sans-serif; font-size:1.55rem; font-weight:700; letter-spacing:-.02em; border-bottom:1px solid rgba(255,255,255,.16); }
+.drawer__body a span{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.12em; color:rgba(255,255,255,.6); }
+.drawer__cta{ display:grid; gap:12px; margin-top:28px; }
+</style>
+</head>
+
+<body>
+<style>
+/* ============================================================
+   v2 — structure follows the Canadiens Foundation homepage:
+   full-bleed type hero → bold statement band → alternating
+   colour-block / photo checkerboard → scattered stat cards →
+   help cards → feature banner → news 3-up → partners →
+   full-bleed image → footer with newsletter card
+   Motion: layered parallax, everything killable via Pause motion
+   ============================================================ */
+
+/* ---------- PARALLAX PRIMITIVES ---------- */
+.para{ will-change:transform; }
+html.no-motion .para{ transform:none !important; }
+.frame{ position:relative; overflow:hidden; isolation:isolate; }
+.frame > video, .frame > img{
+  position:absolute; inset:-15% 0; width:100%; height:130%; object-fit:cover;
+  will-change:transform;
+}
+html.no-motion .frame > video, html.no-motion .frame > img{ inset:0; height:100%; }
+
+/* ---------- 01 HERO ---------- */
+.hero{ position:relative; min-height:clamp(560px, 92vh, 980px); display:flex; align-items:flex-end;
+       background:var(--brand-bg); color:#fff; overflow:clip; }
+.hero__bg{ position:absolute; inset:0; z-index:0; }
+.hero__bg video, .hero__bg img{ width:100%; height:130%; object-fit:cover; object-position:center 26%; position:absolute; inset:-15% 0; }
+.hero__veil{ position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(27,16,68,.72) 0%, rgba(27,16,68,.20) 34%, rgba(27,16,68,.34) 62%, rgba(27,16,68,.88) 100%); }
+html[data-theme="dark"] .hero__veil{ background:linear-gradient(180deg, rgba(6,5,14,.82) 0%, rgba(6,5,14,.32) 34%, rgba(6,5,14,.5) 62%, rgba(6,5,14,.94) 100%); }
+.hero__in{ position:relative; z-index:2; padding-block:clamp(80px,11vw,132px) clamp(26px,3.4vw,48px); }
+.hero__foot{ display:flex; align-items:flex-end; justify-content:space-between;
+  gap:clamp(18px,3vw,48px); margin-top:clamp(26px,3.4vw,52px); flex-wrap:wrap; }
+.hero__cta{ display:flex; align-items:center; gap:clamp(14px,1.8vw,26px); }
+.btn--big{ min-height:62px; padding:18px 34px; font-size:1.06rem; }
+
+/* rotating badge CTA */
+.orb{ position:relative; width:clamp(96px,9vw,126px); aspect-ratio:1; display:grid; place-items:center;
+  border-radius:50%; text-decoration:none; color:#fff; border:1px solid rgba(255,255,255,.45);
+  background:rgba(11,10,20,.28); backdrop-filter:blur(6px); flex:none;
+  transition:background .35s var(--ease), transform .35s var(--ease); }
+.orb:hover{ background:var(--coral); border-color:var(--coral); transform:scale(1.06); color:var(--coral-ink); }
+.orb__ring{ position:absolute; inset:0; width:100%; height:100%; animation:orbspin 18s linear infinite; }
+.orb__ring text{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.22em;
+  fill:currentColor; text-transform:uppercase; }
+@keyframes orbspin{ to{ transform:rotate(360deg); } }
+.orb__arw{ font-size:1.5rem; line-height:1; }
+
+/* hero image grid — one slot flies down into section 02 */
+.hero__tiles{ display:flex; align-items:flex-end; gap:clamp(8px,1vw,14px); }
+.tile{ width:clamp(62px,8.4vw,126px); aspect-ratio:3/4; border-radius:var(--r-md); overflow:hidden;
+  position:relative; box-shadow:var(--shadow-2); background:var(--p-800); }
+.tile:nth-child(odd){ transform:rotate(-2deg); }
+.tile:nth-child(even){ transform:rotate(2.2deg) translateY(-10px); }
+.tile:nth-child(3){ transform:rotate(0deg) translateY(-22px); }
+.tile--slot{ background:rgba(255,255,255,.10); border:1px dashed rgba(255,255,255,.5); box-shadow:none;
+  display:grid; place-items:center; }
+.tile__hint{ font-family:"IBM Plex Mono",monospace; font-size:.54rem; letter-spacing:.16em;
+  text-transform:uppercase; color:rgba(255,255,255,.72); }
+
+/* the travelling image */
+.morph{ position:fixed; z-index:4; border-radius:var(--r-md); overflow:hidden; pointer-events:none;
+  box-shadow:var(--shadow-2); will-change:transform, width, height; background:var(--p-800); }
+.morph video{ width:100%; height:100%; object-fit:cover; object-position:50% 22%; }
+.slot{ background:rgba(255,255,255,.14); border:1px dashed rgba(255,255,255,.4); }
+.hero h1{
+  font-size:clamp(2.4rem, 7.6vw, 6.8rem); line-height:.86; letter-spacing:-.05em;
+  text-transform:uppercase; font-weight:800; margin:0;
+  text-shadow:0 12px 60px rgba(11,10,20,.5);
+}
+.hero h1 .thin{ display:block; -webkit-text-stroke:2px rgba(255,255,255,.92); color:transparent; }
+html.a11y-contrast .hero h1 .thin{ -webkit-text-stroke:0; color:#fff; }
+.hero__card{
+  background:var(--surface); color:var(--text); border-radius:var(--r-lg);
+  padding:clamp(20px,2.2vw,30px); box-shadow:var(--shadow-2);
+}
+.hero__card p{ font-size:1.02rem; color:var(--text-2); }
+.hero__card .btnrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.hero__strip{
+  position:relative; z-index:2; display:flex; flex-wrap:wrap; gap:8px 28px;
+  padding:16px 0 0; margin-top:22px; border-top:1px solid rgba(255,255,255,.28);
+  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.82);
+}
+.hero__strip b{ color:var(--mint-400); font-weight:500; }
+
+/* ---------- 02 STATEMENT BAND + PATHWAYS ---------- */
+.band{ background:var(--accent); color:#fff; position:relative; overflow:clip; text-align:center; }
+html[data-theme="dark"] .band{ background:var(--p-800); }
+.band__in{ padding-block:clamp(70px,11vw,150px); position:relative; z-index:2; }
+.band h2{ font-size:clamp(1.8rem,4.4vw,3.5rem); line-height:1.1; letter-spacing:-.03em; max-width:20ch; margin-inline:auto; }
+.band .eyebrow{ justify-content:center; color:rgba(255,255,255,.86); }
+.band .eyebrow::before{ background:#fff; }
+.band__float{
+  width:clamp(150px,17vw,250px); aspect-ratio:3/4; border-radius:var(--r-lg); overflow:hidden;
+  margin:clamp(28px,4vw,48px) auto 0; box-shadow:var(--shadow-2); position:relative;
+}
+.band__blob{ position:absolute; border-radius:50%; background:rgba(255,255,255,.13); pointer-events:none; z-index:1; }
+.band__blob.b1{ width:420px; height:420px; left:-140px; top:-120px; }
+.band__blob.b2{ width:300px; height:300px; right:-90px; bottom:-110px; background:rgba(245,143,191,.34); }
+.band__blob.b3{ width:190px; height:190px; right:14%; top:-70px; background:rgba(255,194,75,.62); }
+
+.pathways{ background:var(--bg); }
+.paths__grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.path{
+  position:relative; display:flex; flex-direction:column; gap:12px; justify-content:space-between;
+  min-height:190px; padding:20px; border-radius:var(--r-lg); background:var(--bg-3); color:var(--text);
+  text-decoration:none; overflow:hidden; transition:transform .4s var(--ease), background .4s var(--ease);
+}
+.path:hover{ transform:translateY(-6px); background:var(--p-900); color:#fff; }
+.path:hover .path__ico{ background:rgba(255,255,255,.16); color:#fff; }
+.path:hover p, .path:hover .path__go{ color:rgba(255,255,255,.88); }
+.path__ico{ width:44px; height:44px; border-radius:13px; display:grid; place-items:center; background:#fff; color:var(--p-700); transition:all .4s var(--ease); }
+html[data-theme="dark"] .path__ico{ background:rgba(255,255,255,.1); color:var(--accent); }
+.path__ico svg{ width:22px; height:22px; }
+.path h3{ font-size:1.1rem; }
+.path p{ margin:0; font-size:.9rem; color:var(--text-2); }
+.path__go{ font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--link); display:flex; align-items:center; gap:8px; }
+
+/* ---------- 03 FINDER ---------- */
+.finder{ background:var(--brand-bg); color:#fff; position:relative; overflow:clip; }
+.finder__pattern{ position:absolute; inset:auto 0 0 0; height:78%; pointer-events:none; }
+.finder__in{ position:relative; z-index:1; max-width:900px; }
+.finder h2{ color:#fff; }
+.finder .eyebrow{ color:rgba(255,255,255,.75); }
+.finder .eyebrow::before{ background:var(--mint-400); }
+.searchbar{ display:flex; gap:10px; margin-top:clamp(22px,3vw,34px); flex-wrap:wrap; }
+.searchbar__field{ position:relative; flex:1 1 360px; }
+.searchbar__field svg{ position:absolute; left:22px; top:50%; transform:translateY(-50%); width:22px; height:22px; color:var(--p-700); }
+.searchbar input{ width:100%; min-height:66px; padding:18px 22px 18px 58px; border-radius:var(--r-pill); border:2px solid transparent; background:#fff; color:var(--n-900); font-size:1.05rem; font-family:inherit; }
+.searchbar input::placeholder{ color:#6B6B80; }
+.searchbar input:focus-visible{ outline:3px solid var(--mint-400); outline-offset:3px; }
+.searchbar .btn{ min-height:66px; padding-inline:32px; }
+.popular{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:20px; }
+.popular__lbl{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.72); }
+.chip{ display:inline-flex; align-items:center; min-height:42px; padding:8px 18px; border-radius:var(--r-pill);
+  background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.34); color:#fff; cursor:pointer; font-size:.92rem;
+  text-decoration:none; transition:background .25s var(--ease), transform .25s var(--ease); }
+.chip:hover{ background:#fff; color:var(--p-900); transform:translateY(-2px); }
+.searchstatus{ margin-top:16px; min-height:26px; font-size:.95rem; color:var(--mint-400); }
+
+/* ---------- 04 CHECKERBOARD (colour block / photo) ---------- */
+.checker{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(10px,1.2vw,18px); }
+.checker > .cell{ border-radius:var(--r-lg); overflow:hidden; }
+.cell{ position:relative; min-height:clamp(320px, 42vw, 560px); }
+.cell--media{ overflow:hidden; }
+.cell--text{ display:flex; flex-direction:column; justify-content:center; gap:14px; padding:clamp(28px,4.4vw,72px); }
+.cell--text .kicker{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; opacity:.8; }
+.cell--text h3{ font-size:clamp(1.7rem,3.4vw,3rem); line-height:1.02; letter-spacing:-.035em; text-transform:uppercase; }
+.cell--text p{ margin:0; font-size:1.02rem; max-width:38ch; opacity:.92; }
+.cell--text .textlink{ margin-top:8px; align-self:flex-start; }
+.c-purple{ background:var(--p-900); color:#fff; } .c-purple .textlink{ color:var(--mint-400); }
+.c-blue{ background:var(--accent); color:#fff; } .c-blue .textlink{ color:#fff; }
+html[data-theme="dark"] .c-blue{ background:var(--p-700); }
+.c-mint{ background:var(--mint-400); color:#0B2B26; } .c-mint .textlink{ color:#0B2B26; }
+.c-lilac{ background:var(--p-050); color:var(--p-900); } .c-lilac .textlink{ color:var(--p-800); }
+.c-coral{ background:var(--coral); color:var(--coral-ink); } .c-coral .textlink{ color:var(--coral-ink); }
+.c-amber{ background:var(--amber); color:var(--amber-ink); } .c-amber .textlink{ color:var(--amber-ink); }
+.c-rose{ background:var(--rose); color:var(--rose-ink); } .c-rose .textlink{ color:var(--rose-ink); }
+html[data-theme="dark"] .c-lilac{ background:var(--bg-3); color:var(--text); }
+html[data-theme="dark"] .c-lilac .textlink{ color:var(--link); }
+.cell__num{
+  position:absolute; top:clamp(18px,2.4vw,34px); left:clamp(18px,2.4vw,34px);
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em; opacity:.65;
+}
+.cell--media .cell__num{ color:#fff; background:rgba(11,10,20,.5); border:1px solid rgba(255,255,255,.4);
+  padding:6px 12px; border-radius:var(--r-pill); opacity:1; backdrop-filter:blur(6px); z-index:2; }
+
+/* ---------- 05 EVIDENCE (sticky parallax rail) ---------- */
+.evidence{ background:var(--bg-2); }
+.ev__grid{ display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(24px,5vw,80px); align-items:start; }
+.ev__sticky{ position:sticky; top:calc(var(--header-h) + 40px); }
+.ev__steps{ display:grid; gap:clamp(14px,2vw,22px); }
+.evstep{
+  display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start;
+  padding:clamp(20px,2.4vw,32px); border-radius:var(--r-lg); background:var(--surface);
+  border:1px solid var(--line); transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .4s var(--ease);
+}
+.evstep:hover{ transform:translateX(6px); box-shadow:var(--shadow-1); border-color:var(--accent-line); }
+.evstep__dot{ width:62px; height:62px; border-radius:50%; display:grid; place-items:center; background:var(--bg-3); color:var(--p-700); flex:none; }
+html[data-theme="dark"] .evstep__dot{ color:var(--accent); }
+.evstep__dot svg{ width:26px; height:26px; }
+.evstep__k{ font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 6px; }
+.evstep h3{ font-size:1.3rem; margin-bottom:8px; }
+.evstep p{ margin:0; color:var(--text-2); font-size:.96rem; }
+.evstep__proof{ margin-top:12px; padding-top:12px; border-top:1px dashed var(--line-strong); font-size:.86rem; color:var(--text-2); }
+.evstep__proof b{ color:var(--text); }
+
+/* ---------- 06 INITIATIVES ---------- */
+.inits__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,1.8vw,24px); }
+.init{ position:relative; display:flex; flex-direction:column; border-radius:var(--r-lg); overflow:hidden;
+  background:var(--bg-3); color:var(--text); text-decoration:none; min-height:400px;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease); }
+html[data-theme="dark"] .init{ background:var(--surface); border:1px solid var(--line); }
+.init:hover{ transform:translateY(-8px); box-shadow:var(--shadow-2); }
+.init__head{ padding:26px 24px 18px; display:flex; flex-direction:column; gap:10px; }
+.init:nth-child(3) .init__tag{ background:var(--coral); color:var(--coral-ink); }
+.init:nth-child(6) .init__tag{ background:var(--amber); color:var(--amber-ink); }
+.init__tag{ align-self:flex-start; font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.15em;
+  text-transform:uppercase; padding:6px 12px; border-radius:var(--r-pill); background:var(--p-900); color:#fff; }
+.init h3{ font-size:1.5rem; }
+.init p{ margin:0; font-size:.95rem; color:var(--text-2); }
+.init__ph{ margin-top:auto; height:200px; position:relative; overflow:hidden; }
+.init__go{ display:inline-flex; align-items:center; gap:9px; font-weight:600; font-size:.93rem; color:var(--link);
+  border-bottom:2px solid currentColor; padding-bottom:3px; align-self:flex-start; margin-top:4px; }
+.init--solid{ background:var(--p-900); color:#fff; }
+.init--solid p{ color:rgba(255,255,255,.84); }
+.init--solid .init__tag{ background:var(--mint-400); color:#0B2B26; }
+.init--solid .init__go{ color:var(--mint-400); }
+.init--mint{ background:var(--mint-400); color:#0B2B26; }
+.init--mint p{ color:#12403A; }
+.init--mint .init__tag{ background:#0B2B26; color:var(--mint-400); }
+.init--mint .init__go{ color:#0B2B26; }
+
+/* ---------- 07 IMPACT — scattered stat cards ---------- */
+.impact{ background:var(--p-050); color:var(--p-900); position:relative; overflow:clip; }
+html[data-theme="dark"] .impact{ background:var(--bg-2); color:var(--text); }
+.impact__pattern{ position:absolute; inset:0; pointer-events:none; z-index:2; }
+.impact__in{ position:relative; z-index:1; }
+.impact__head{ text-align:center; max-width:min(100%, 760px); margin-inline:auto; }
+.impact__head h2{ font-size:clamp(1.9rem,4vw,3.2rem); }
+.impact__float{ width:clamp(130px,14vw,190px); aspect-ratio:1; border-radius:var(--r-lg); overflow:hidden;
+  margin:0 auto clamp(24px,3vw,40px); box-shadow:var(--shadow-2); position:relative; }
+.scatter{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(12px,1.6vw,22px); margin-top:clamp(38px,5vw,72px); }
+.scard{
+  background:var(--surface); border-radius:var(--r-md); padding:22px 20px 20px;
+  box-shadow:0 14px 40px -18px rgba(27,16,68,.5); border:1px solid var(--line);
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.scard:nth-child(1){ transform:rotate(-2.4deg) translateY(10px); border-top-color:var(--p-700); }
+.scard:nth-child(2){ border-top-color:var(--coral); }
+.scard:nth-child(3){ border-top-color:var(--accent); }
+.scard:nth-child(4){ border-top-color:var(--amber); }
+.scard:nth-child(2) .scard__n{ color:#C43B1C; }
+.scard:nth-child(3) .scard__n{ color:var(--blue-600); }
+.scard:nth-child(4) .scard__n{ color:#8A5B00; }
+html[data-theme="dark"] .scard:nth-child(2) .scard__n{ color:#FF9179; }
+html[data-theme="dark"] .scard:nth-child(3) .scard__n{ color:var(--blue-300); }
+html[data-theme="dark"] .scard:nth-child(4) .scard__n{ color:var(--amber); }
+.scard:nth-child(2){ transform:rotate(1.6deg) translateY(-16px); }
+.scard:nth-child(3){ transform:rotate(-1.2deg) translateY(22px); }
+.scard:nth-child(4){ transform:rotate(2.6deg) translateY(-6px); }
+.scard:hover{ transform:rotate(0deg) translateY(-6px) scale(1.02); box-shadow:var(--shadow-2); z-index:3; }
+html.no-motion .scard{ transform:none !important; }
+.scard{ border-top:5px solid var(--p-700); }
+.scatter li:nth-child(2) .scard, .scatter li:nth-child(2){ border-top-color:var(--coral); }
+.scard__n{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:clamp(2.1rem,3.6vw,3.1rem);
+  line-height:.94; letter-spacing:-.045em; color:var(--p-800); display:flex; align-items:baseline; }
+html[data-theme="dark"] .scard__n{ color:var(--mint); }
+.scard__n .suf{ font-size:.5em; }
+.scard__l{ margin:12px 0 0; font-size:.9rem; color:var(--text-2); }
+.scard__src{ margin-top:10px; font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--text-2); opacity:.85; }
+
+.quote{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(20px,3vw,48px); align-items:center;
+  margin-top:clamp(44px,6vw,90px); padding:clamp(20px,2.6vw,36px); border-radius:var(--r-xl);
+  background:var(--p-900); color:#fff; }
+.quote__media{ border-radius:var(--r-lg); overflow:hidden; aspect-ratio:4/3; position:relative; }
+.quote blockquote{ margin:0; font-family:"Bricolage Grotesque",sans-serif; font-weight:600;
+  font-size:clamp(1.25rem,2.2vw,1.95rem); line-height:1.2; letter-spacing:-.025em; }
+.quote figcaption{ margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,.26);
+  font-size:.92rem; color:rgba(255,255,255,.84); }
+.quote figcaption b{ display:block; color:#fff; font-size:1rem; }
+
+/* ---------- 08 PEOPLE ---------- */
+.people__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(14px,1.8vw,22px); }
+.person{ border-radius:var(--r-lg); overflow:hidden; background:var(--surface); border:1px solid var(--line);
+  text-decoration:none; color:var(--text); display:flex; flex-direction:column;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease); }
+.person:hover{ transform:translateY(-7px); box-shadow:var(--shadow-2); }
+.person__ph{ aspect-ratio:4/5; position:relative; overflow:hidden; background:var(--bg-3); }
+.person__ph video, .person__ph img{ position:absolute; inset:-15% 0; width:100%; height:130%; object-fit:cover; object-position:50% 12%; }
+.person__badge{ position:absolute; left:14px; bottom:14px; z-index:2; font-family:"IBM Plex Mono",monospace;
+  font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:6px 12px; border-radius:var(--r-pill);
+  background:rgba(11,10,20,.62); color:#fff; border:1px solid rgba(255,255,255,.35); backdrop-filter:blur(6px); }
+.person__body{ padding:20px 20px 24px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.person__body h3{ font-size:1.12rem; }
+.person__role{ margin:0; font-size:.89rem; color:var(--text-2); }
+.person__body .textlink{ margin-top:14px; align-self:flex-start; font-size:.88rem; }
+
+/* ---------- 09 FEATURE BANNER ---------- */
+.banner{ padding-block:clamp(40px,6vw,90px); }
+.banner__box{ position:relative; min-height:clamp(400px,52vw,640px); display:flex; align-items:center;
+  overflow:hidden; border-radius:var(--r-xl); background:var(--p-800); padding:clamp(20px,3vw,52px); }
+.banner__bg{ position:absolute; inset:0; }
+.banner__bg video, .banner__bg img{ position:absolute; inset:-15% 0; width:100%; height:130%; object-fit:cover; object-position:center 30%; }
+.banner__veil{ position:absolute; inset:0; border-radius:var(--r-xl); background:linear-gradient(90deg, rgba(27,16,68,.92) 0%, rgba(27,16,68,.52) 52%, rgba(27,16,68,.16) 100%); }
+.banner__card{ position:relative; z-index:2; max-width:min(520px,92%); background:var(--accent); color:#fff;
+  border-radius:var(--r-lg); padding:clamp(24px,3vw,40px); box-shadow:var(--shadow-2); }
+html[data-theme="dark"] .banner__card{ background:var(--p-800); }
+.banner__card h2{ font-size:clamp(1.6rem,3vw,2.5rem); margin-bottom:12px; }
+.banner__card p{ color:rgba(255,255,255,.9); font-size:1rem; }
+.banner__card .btn{ margin-top:8px; }
+
+/* ---------- 10 NEWS ---------- */
+.news3{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,28px); }
+.post{ display:flex; flex-direction:column; text-decoration:none; color:var(--text); }
+.post__ph{ aspect-ratio:4/3; border-radius:var(--r-md); overflow:hidden; position:relative; background:var(--bg-3); }
+.post__ph video, .post__ph img{ position:absolute; inset:-15% 0; width:100%; height:130%; object-fit:cover; object-position:50% 22%; }
+.post__meta{ display:flex; gap:12px; align-items:center; margin-top:16px; font-family:"IBM Plex Mono",monospace;
+  font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-2); }
+.post__meta .tag{ color:var(--p-700); }
+.news3 > *:nth-child(2) .tag{ color:#C43B1C; }
+.news3 > *:nth-child(3) .tag{ color:#0F7A4E; }
+html[data-theme="dark"] .post__meta .tag{ color:var(--accent); }
+.post h3{ font-size:1.16rem; line-height:1.2; margin-top:8px; }
+.post:hover h3{ text-decoration:underline; text-underline-offset:3px; }
+.post p{ margin:8px 0 0; font-size:.93rem; color:var(--text-2); }
+
+/* ---------- 11 PARTNERS ---------- */
+.partners{ background:var(--accent); color:#fff; }
+html[data-theme="dark"] .partners{ background:var(--bg-3); }
+.partners h2{ text-align:center; font-size:clamp(1.4rem,2.4vw,2rem); margin-bottom:clamp(26px,3.4vw,44px); }
+.plogos{ display:grid; grid-template-columns:repeat(5,1fr); gap:clamp(10px,1.4vw,18px); }
+.plogo{ background:#fff; border-radius:var(--r-md); min-height:118px; display:grid; place-items:center; padding:18px;
+  text-align:center; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:.98rem;
+  letter-spacing:-.02em; color:var(--p-900); text-decoration:none; line-height:1.2;
+  transition:transform .35s var(--ease); }
+.plogo span{ display:block; font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:.6rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--n-600); margin-top:6px; }
+.plogo:hover{ transform:translateY(-5px) rotate(-1deg); box-shadow:0 12px 0 -6px var(--amber); }
+.plogos > *:nth-child(3n+2):hover{ box-shadow:0 12px 0 -6px var(--coral); }
+.plogos > *:nth-child(3n+3):hover{ box-shadow:0 12px 0 -6px var(--rose); }
+
+/* ---------- 12 CLOSING IMAGE + FOOTER ---------- */
+.closerwrap{ padding-block:clamp(20px,3vw,44px); }
+.closer{ position:relative; height:clamp(260px,40vw,560px); overflow:hidden; border-radius:var(--r-xl); background:var(--p-800); }
+.closer video, .closer img{ position:absolute; inset:-15% 0; width:100%; height:130%; object-fit:cover; object-position:center 32%; }
+
+.ftr{ background:var(--brand-bg); color:#fff; padding-top:clamp(44px,5vw,72px); overflow:clip; }
+.ftr a{ color:rgba(255,255,255,.86); text-decoration:none; }
+.ftr a:hover{ color:#fff; text-decoration:underline; text-underline-offset:3px; }
+.ftr__top{ display:grid; grid-template-columns:1.15fr repeat(3, minmax(0,.8fr)) 1.1fr; gap:clamp(20px,3vw,44px);
+  padding-bottom:clamp(30px,4vw,52px); border-bottom:1px solid rgba(255,255,255,.2); }
+.ftr__brand img{ height:38px; margin-bottom:16px; }
+.ftr__brand p{ color:rgba(255,255,255,.78); font-size:.94rem; max-width:32ch; }
+.ftr h2, .ftr h3{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; font-weight:600; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--mint-400); margin:0 0 14px; }
+.ftr__col li a, .ftr__legal a, .ftr__contact a{ display:inline-block; padding-block:5px; min-height:24px; }
+.ftr__col li{ margin-bottom:5px; font-size:.95rem; }
+.ftr__contact{ font-style:normal; color:rgba(255,255,255,.8); font-size:.94rem; line-height:1.75; }
+.socials{ display:flex; gap:10px; margin-top:18px; }
+.socials a{ display:grid; place-items:center; width:44px; height:44px; min-width:44px; min-height:44px;
+  border-radius:var(--r-pill); border:1px solid rgba(255,255,255,.32); transition:all .25s var(--ease); }
+.socials a:hover{ background:#fff; color:var(--p-900); transform:translateY(-2px); }
+.socials svg{ width:18px; height:18px; }
+
+/* newsletter card sits inside the footer, like the reference */
+.nlcard{ background:var(--p-050); color:var(--p-900); border-radius:var(--r-lg); padding:24px; }
+html[data-theme="dark"] .nlcard{ background:var(--bg-3); color:var(--text); }
+.nlcard h2{ color:var(--p-800); }
+html[data-theme="dark"] .nlcard h2{ color:var(--mint); }
+.nlcard .h-sm{ font-size:1.5rem; letter-spacing:-.03em; margin-bottom:10px; }
+.nlcard p{ font-size:.9rem; color:var(--text-2); }
+html[data-theme="dark"] .nlcard p{ color:var(--text-2); }
+.field label{ display:block; font-weight:600; font-size:.88rem; margin-bottom:6px; }
+.field input{ width:100%; min-height:50px; padding:12px 16px; border-radius:var(--r-sm);
+  border:2px solid var(--line-strong); background:#fff; color:var(--n-900); font:inherit; }
+html[data-theme="dark"] .field input{ background:var(--surface); color:var(--text); }
+.field input:focus-visible{ outline:3px solid var(--focus); outline-offset:2px; }
+.field[data-invalid="true"] input{ border-color:#B3261E; background:#FFF5F4; }
+.err{ display:none; align-items:center; gap:7px; margin-top:7px; color:#8C1D18; font-size:.84rem; font-weight:600; }
+html[data-theme="dark"] .err{ color:#FFB4AB; }
+.field[data-invalid="true"] .err{ display:flex; }
+.hint{ font-size:.8rem; color:var(--text-2); margin-top:6px; }
+fieldset{ border:0; padding:0; margin:16px 0 0; }
+legend{ font-weight:600; font-size:.88rem; padding:0; margin-bottom:10px; }
+.interests{ display:flex; flex-wrap:wrap; gap:8px; }
+.interest{ position:relative; }
+.interest input{ position:absolute; opacity:0; width:100%; height:100%; margin:0; cursor:pointer; }
+.interest span{ display:inline-flex; align-items:center; gap:7px; min-height:40px; padding:8px 14px;
+  border-radius:var(--r-pill); border:2px solid var(--line-strong); background:transparent; font-size:.86rem; transition:all .25s var(--ease); }
+.interest input:checked + span{ background:var(--p-900); border-color:var(--p-900); color:#fff; }
+.interest input:focus-visible + span{ outline:3px solid var(--focus); outline-offset:3px; }
+.interest span::before{ content:"+"; font-family:"IBM Plex Mono",monospace; opacity:.6; }
+.interest input:checked + span::before{ content:"✓"; opacity:1; }
+.formstatus{ margin-top:12px; min-height:22px; font-size:.9rem; font-weight:600; }
+.formstatus[data-state="ok"]{ color:#0F7A4E; }
+html[data-theme="dark"] .formstatus[data-state="ok"]{ color:#7BE0AC; }
+
+.ftr__mid{ display:flex; flex-wrap:wrap; gap:14px 30px; align-items:center; justify-content:space-between;
+  padding-block:22px; border-bottom:1px solid rgba(255,255,255,.2); font-size:.88rem; color:rgba(255,255,255,.76); }
+.ftr__legal{ display:flex; flex-wrap:wrap; gap:4px 22px; }
+.byline{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:.88rem; color:rgba(255,255,255,.76); }
+.byline__logo{ display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border-radius:var(--r-pill);
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.24); transition:background .25s var(--ease); }
+.byline__logo:hover{ background:rgba(255,255,255,.16); }
+.byline__logo svg{ height:26px; width:auto; }
+.wordmark{ padding:clamp(24px,3vw,44px) 0 clamp(12px,2vw,24px); }
+.wordmark svg{ width:100%; height:auto; display:block; overflow:visible; }
+.wordmark text{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; letter-spacing:-.045em; fill:rgba(255,255,255,.15); }
+.wordmark:hover text{ fill:rgba(167,214,205,.34); transition:fill .8s var(--ease); }
+.ftr__base{ padding-bottom:32px; font-size:.85rem; color:rgba(255,255,255,.74);
+  display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1180px){
+  .paths__grid{ grid-template-columns:repeat(3,1fr); }
+  .plogos{ grid-template-columns:repeat(3,1fr); }
+  .ftr__top{ grid-template-columns:1fr 1fr 1fr; }
+  .ftr__nl{ grid-column:1 / -1; }
+}
+@media (max-width:980px){
+  .sect-head{ grid-template-columns:1fr; align-items:start; }
+  .hero__foot{ align-items:flex-start; }
+  .ev__grid{ grid-template-columns:1fr; }
+  .ev__sticky{ position:static; }
+  .scatter{ grid-template-columns:1fr 1fr; }
+  .quote{ grid-template-columns:1fr; }
+  .inits__grid, .news3, .people__grid{ grid-template-columns:repeat(2,1fr); }
+  .checker{ grid-template-columns:1fr; }
+  .cell{ min-height:300px; }
+  .checker .cell--media{ order:-1; }
+  .checker > div:nth-child(4n+3){ order:0; }
+}
+@media (max-width:820px){
+  :root{ --header-h:64px; }
+  .paths__grid{ grid-template-columns:1fr 1fr; }
+  .path{ min-height:0; padding:16px; }
+  .path p{ display:none; }
+  .inits__grid, .news3, .people__grid{ grid-template-columns:1fr; }
+  .scatter{ grid-template-columns:1fr; gap:14px; }
+  .scard{ transform:none !important; }
+  .plogos{ grid-template-columns:repeat(2,1fr); }
+  .searchbar .btn{ width:100%; }
+  .ftr__top{ grid-template-columns:1fr 1fr; }
+  .ftr__brand, .ftr__nl{ grid-column:1 / -1; }
+  .a11y-panel{ right:10px; left:10px; width:auto; bottom:84px; }
+  .a11y-fab{ right:14px; bottom:14px; }
+  .totop{ right:16px; bottom:84px; }
+  .toggles{ grid-template-columns:1fr; }
+  .hero h1{ font-size:clamp(2.4rem,12.5vw,4.2rem); }
+  .banner__card{ max-width:100%; }
+}
+@media (max-width:520px){
+  .paths__grid{ grid-template-columns:1fr; }
+  .path{ flex-direction:row; align-items:center; min-height:62px; }
+  .path__go{ margin-left:auto; }
+  .path__go span{ display:none; }
+  .plogos{ grid-template-columns:1fr 1fr; }
+  .ftr__top{ grid-template-columns:1fr; }
+}
+@media print{ .hdr,.a11y-fab,.a11y-panel,.totop,.progress,.mediactl,.deck-ui{ display:none !important; } }
+</style>
+
+<style>
+/* ---------- 16. ACCESSIBILITY WIDGET ---------- */
+.a11y-fab{
+  position:fixed; right:18px; bottom:18px; z-index:190; width:60px; height:60px; border-radius:50%;
+  background:var(--p-900); color:#fff; border:2px solid #fff; cursor:pointer; display:grid; place-items:center;
+  box-shadow:0 10px 30px -8px rgba(11,10,20,.6);
+  transition:transform .35s var(--ease), background .3s var(--ease);
+}
+html[data-theme="dark"] .a11y-fab{ background:#fff; color:var(--p-900); border-color:var(--p-900); }
+.a11y-fab:hover{ transform:scale(1.07); }
+.a11y-fab svg{ width:32px; height:32px; }
+.a11y-fab::after{
+  content:""; position:absolute; inset:-6px; border-radius:50%; border:2px solid var(--mint-400);
+  opacity:0; animation:pulse 3.6s var(--ease) infinite;
+}
+@keyframes pulse{ 0%{ opacity:.85; transform:scale(.9);} 70%{ opacity:0; transform:scale(1.35);} 100%{opacity:0;} }
+
+.a11y-panel{
+  position:fixed; right:18px; bottom:90px; z-index:191; width:min(370px, calc(100vw - 36px));
+  max-height:min(76vh, 680px); overflow-y:auto; overscroll-behavior:contain;
+  background:var(--surface); color:var(--text); border:2px solid var(--line-strong); border-radius:var(--r-lg);
+  box-shadow:var(--shadow-2); padding:20px; display:none;
+}
+.a11y-panel[data-open="true"]{ display:block; animation:pop .3s var(--ease); }
+@keyframes pop{ from{ opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+.a11y-panel h2{ font-size:1.16rem; margin:0; }
+.a11y-panel__head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px; }
+.a11y-panel__sub{ font-size:.86rem; color:var(--text-2); margin:0 0 16px; }
+.a11y-group{ margin-bottom:18px; }
+.a11y-group > h3{ font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-2); margin:0 0 10px; }
+.toggles{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.tgl{
+  display:flex; align-items:center; gap:10px; min-height:52px; padding:10px 12px; border-radius:var(--r-md);
+  border:2px solid var(--line); background:var(--bg-2); color:var(--text); cursor:pointer; text-align:left;
+  font-size:.88rem; font-weight:500; line-height:1.2; transition:all .25s var(--ease);
+}
+.tgl svg{ width:19px; height:19px; flex:none; }
+.tgl:hover{ border-color:var(--line-strong); }
+.tgl[aria-pressed="true"]{ background:var(--p-900); border-color:var(--p-900); color:#fff; }
+html[data-theme="dark"] .tgl[aria-pressed="true"]{ background:var(--p-500); border-color:var(--p-500); }
+.tgl__state{ margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.1em; opacity:.7; }
+.a11y-reader{ display:flex; gap:8px; flex-wrap:wrap; }
+.a11y-reader .btn{ flex:1 1 auto; min-height:48px; }
+.readstatus{ margin-top:10px; font-size:.84rem; color:var(--text-2); min-height:20px; }
+.rate{ display:flex; align-items:center; gap:10px; margin-top:10px; font-size:.86rem; }
+.rate input{ flex:1; accent-color:var(--p-700); }
+.a11y-foot{ display:flex; gap:8px; margin-top:6px; }
+.tts-active{ outline:3px dashed var(--accent) !important; outline-offset:6px; border-radius:8px; background:color-mix(in srgb, var(--mint-200) 42%, transparent); }
+html[data-theme="dark"] .tts-active{ background:rgba(143,160,255,.14); }
+
+.toast{
+  position:fixed; left:50%; bottom:26px; transform:translate(-50%, 130%); z-index:195;
+  background:var(--p-900); color:#fff; padding:14px 22px; border-radius:var(--r-pill);
+  box-shadow:var(--shadow-2); font-weight:600; font-size:.94rem; display:flex; align-items:center; gap:10px;
+  transition:transform .5s var(--ease); max-width:calc(100vw - 32px);
+}
+.toast[data-show="true"]{ transform:translate(-50%,0); }
+html[data-theme="dark"] .toast{ background:#fff; color:var(--p-900); }
+
+.totop{
+  position:fixed; right:22px; bottom:88px; z-index:180; width:46px; height:46px; border-radius:50%;
+  background:var(--surface); color:var(--text); border:2px solid var(--line-strong); cursor:pointer;
+  display:grid; place-items:center; opacity:0; visibility:hidden; transform:translateY(10px);
+  transition:opacity .35s var(--ease), transform .35s var(--ease), visibility .35s;
+}
+.totop[data-show="true"]{ opacity:1; visibility:visible; transform:none; }
+@media (min-width:1100px){ .totop{ bottom:22px; right:92px; } }
+
+/* ---------- 17. DECK (mobile play-card stack) ---------- */
+.deck-ui{ display:none; }
+@media (max-width:820px){
+  .deck-ui{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; }
+  .deck-ui__dots{ display:flex; gap:7px; }
+  .deck-ui__dots button{ width:9px; height:9px; padding:0; border-radius:50%; border:0; background:var(--line-strong); cursor:pointer; transition:all .3s var(--ease); }
+  .deck-ui__dots button[aria-current="true"]{ background:var(--accent); width:26px; border-radius:5px; }
+  .deck-ui__nav{ display:flex; gap:8px; }
+  .deck-ui__nav button{ width:48px; height:48px; border-radius:50%; display:grid; place-items:center; background:var(--surface); border:2px solid var(--line-strong); cursor:pointer; }
+  .deck-ui__nav button:disabled{ opacity:.35; cursor:default; }
+  .deck-ui__count{ font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.12em; color:var(--text-2); }
+
+  .deck{ position:relative; display:block !important; touch-action:pan-y; }
+  .deck > *{
+    position:absolute; inset:0; margin:0 !important;
+    transition:transform .5s var(--ease), opacity .4s var(--ease), box-shadow .4s var(--ease);
+    will-change:transform;
+  }
+  .deck > [data-pos="0"]{ position:relative; z-index:4; transform:none; opacity:1; box-shadow:var(--shadow-2); }
+  .deck > [data-pos="1"]{ z-index:3; transform:translate3d(0,16px,0) scale(.955) rotate(1.6deg); opacity:1; }
+  .deck > [data-pos="2"]{ z-index:2; transform:translate3d(0,30px,0) scale(.915) rotate(-1.8deg); opacity:.9; }
+  .deck > [data-pos="3"]{ z-index:1; transform:translate3d(0,42px,0) scale(.88) rotate(1.1deg); opacity:.55; }
+  .deck > [data-pos="hidden"]{ z-index:0; transform:translate3d(0,48px,0) scale(.86); opacity:0; pointer-events:none; }
+  .deck[data-anim="left"] > [data-pos="0"]{ transform:translate3d(-115%,0,0) rotate(-9deg); opacity:0; }
+  .deck[data-anim="right"] > [data-pos="0"]{ transform:translate3d(115%,0,0) rotate(9deg); opacity:0; }
+  .deck.is-list > *{ position:relative; inset:auto; transform:none !important; opacity:1 !important; margin-bottom:14px !important; }
+  .deck.is-list{ display:grid !important; gap:14px; }
+  .deck.is-list + .deck-ui .deck-ui__nav, .deck.is-list + .deck-ui .deck-ui__dots{ display:none; }
+}
+
+
+</style>
+
+<div class="skips">
+  <a href="#main">Skip to main content</a>
+  <a href="#finder-input">Skip to search</a>
+  <a href="#a11y-fab">Skip to accessibility tools</a>
+  <a href="#footer">Skip to footer</a>
+</div>
+
+<div class="progress" aria-hidden="true"><i id="progress-bar"></i></div>
+
+<div id="page-shell">
+
+<header class="hdr" id="top" tabindex="-1">
+  <div class="wrap hdr__in">
+    <a class="brand" href="#top" aria-label="de Beaumont Foundation — home">
+      <img src="data:image/webp;base64,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" alt="de Beaumont Foundation" width="180" height="34">
+      <span class="brand__tag">Inciting action.<br>Driving change.</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a href="#pillars">Our work</a></li>
+        <li><a href="#initiatives">Programs</a></li>
+        <li><a href="#finder">Resources</a></li>
+        <li><a href="#insights">News &amp; ideas</a></li>
+        <li><a href="#press">Media</a></li>
+        <li><a href="#footer">About</a></li>
+      </ul>
+    </nav>
+    <div class="hdr__tools">
+      <div class="themesw" role="group" aria-label="Colour theme">
+        <span class="themesw__label" aria-hidden="true">Theme</span>
+        <button type="button" data-theme-btn="light" aria-pressed="false" aria-label="Light theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+        </button>
+        <button type="button" data-theme-btn="dark" aria-pressed="false" aria-label="Dark theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg>
+        </button>
+        <button type="button" data-theme-btn="auto" aria-pressed="true" aria-label="Automatic theme, follows time of day">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+        </button>
+      </div>
+      <button class="icon-btn theme-cycle" type="button" id="theme-cycle" aria-label="Theme: automatic. Activate to switch to light.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" id="theme-cycle-icon"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+      </button>
+      <button class="icon-btn burger" type="button" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Site menu">
+  <div class="drawer__top">
+    <img src="data:image/webp;base64,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" alt="de Beaumont Foundation" style="height:30px;width:auto">
+    <button class="icon-btn" type="button" id="drawer-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <div class="drawer__theme">
+      <span>Appearance</span>
+      <div class="themesw" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-btn="light" aria-pressed="false" aria-label="Light theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+        </button>
+        <button type="button" data-theme-btn="dark" aria-pressed="false" aria-label="Dark theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/></svg>
+        </button>
+        <button type="button" data-theme-btn="auto" aria-pressed="true" aria-label="Automatic theme, follows time of day">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+        </button>
+      </div>
+    </div>
+    <a href="#pillars" data-drawer-link>Our work <span>01</span></a>
+    <a href="#initiatives" data-drawer-link>Programs <span>02</span></a>
+    <a href="#finder" data-drawer-link>Resources <span>03</span></a>
+    <a href="#people" data-drawer-link>People <span>04</span></a>
+    <a href="#insights" data-drawer-link>News &amp; ideas <span>05</span></a>
+    <a href="#press" data-drawer-link>Media <span>06</span></a>
+    <a href="#footer" data-drawer-link>About &amp; contact <span>07</span></a>
+    <div class="drawer__cta">
+      <a class="btn btn--light" href="#pillars" data-drawer-link>Explore our work <span class="arw" aria-hidden="true">→</span></a>
+      <a class="btn btn--onbrand" href="#finder" data-drawer-link>Find resources <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ 01 HERO ============ -->
+<section class="hero" aria-labelledby="hero-h" data-read-section>
+  <div class="hero__bg" aria-hidden="true">
+    <video id="hero-video" class="para" data-para="0.22" autoplay muted loop playsinline preload="metadata"
+           poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">
+      <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__veil" aria-hidden="true"></div>
+  <div class="morph" id="morph" aria-hidden="true">
+    <video muted loop playsinline preload="none" data-hoverplay
+           poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+      <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="wrap hero__in">
+    <div class="hero__head para" data-para="-0.10">
+      <p class="eyebrow" style="color:rgba(255,255,255,.8)"><span class="num">01</span> &nbsp;de Beaumont Foundation</p>
+      <h1 id="hero-h">Strengthening<br>public health<span class="thin">for everyone</span></h1>
+    </div>
+
+    <div class="hero__foot">
+      <div class="hero__cta para" data-para="-0.06">
+        <a class="btn btn--light btn--big" href="#pillars">Explore our work <span class="arw" aria-hidden="true">&rarr;</span></a>
+        <a class="orb" href="#finder">
+          <svg class="orb__ring" viewBox="0 0 130 130" aria-hidden="true" focusable="false">
+            <defs><path id="orbpath" d="M65,65 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text><textPath href="#orbpath">FIND RESOURCES &#183; SEARCH THE LIBRARY &#183; </textPath></text>
+          </svg>
+          <span class="orb__arw" aria-hidden="true">&darr;</span>
+          <span class="sr-only">Find resources &mdash; search the library</span>
+        </a>
+      </div>
+
+      <ul class="hero__tiles" role="list" aria-label="Our work in pictures">
+        <li class="tile frame">
+          <video class="para" data-para="0.05" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500">
+            <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+        </li>
+        <li class="tile frame">
+          <video class="para" data-para="0.09" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/30141972/adventist-adventist-health-doctor-nurse-30141972.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500">
+            <source src="https://videos.pexels.com/video-files/30141972/12925676_1920_1080_24fps.mp4" type="video/mp4">
+          </video>
+        </li>
+        <li class="tile tile--slot" id="morph-from" aria-hidden="true">
+          <span class="tile__hint">scroll</span>
+        </li>
+        <li class="tile frame">
+          <video class="para" data-para="0.17" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500">
+            <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </li>
+        <li class="tile frame">
+          <video class="para" data-para="0.21" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=500">
+            <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </li>
+      </ul>
+    </div>
+
+    <p class="hero__strip">
+      <span>Founded <b>1998</b></span>
+      <span>Bethesda, <b>Maryland</b></span>
+      <span>Policy &#183; Partnerships &#183; People &#183; <b>Communication</b></span>
+    </p>
+  </div>
+
+  <button class="mediactl" type="button" id="hero-toggle" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" id="hero-toggle-icon"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg>
+    <span id="hero-toggle-text">Pause background video</span>
+  </button>
+</section>
+
+<!-- ============ 02 STATEMENT BAND ============ -->
+<section class="band" aria-labelledby="band-h" data-read-section>
+  <span class="band__blob b1 para" data-para="0.18" aria-hidden="true"></span>
+  <span class="band__blob b2 para" data-para="-0.14" aria-hidden="true"></span>
+  <span class="band__blob b3 para" data-para="0.24" aria-hidden="true"></span>
+  <div class="wrap band__in">
+    <p class="eyebrow"><span class="num">02</span> &nbsp;Why it matters</p>
+    <h2 class="h-lg" id="band-h">Behind every policy and every partnership, there is a community that gets healthier.</h2>
+    <div class="band__float slot" id="morph-to" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ 02b AUDIENCE PATHWAYS ============ -->
+<section class="sect pathways" id="pathways" aria-labelledby="paths-h" data-read-section>
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div>
+        <p class="eyebrow">Start here</p>
+        <h2 class="h-lg" id="paths-h">How can we help?</h2>
+        <p class="lede">Tell us who you are and we will take you straight to the evidence, tools and people most useful to your work.</p>
+      </div>
+      <a class="textlink" href="#finder">Not sure? Search everything <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+    <ul class="paths__grid" role="list">
+      <li class="rv"><a class="path" href="#initiatives">
+        <span class="path__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 4 7v5.3c0 4.6 3.3 7.3 8 8.2 4.7-.9 8-3.6 8-8.2V7Z"/><path d="M9.4 12.2h5.2M12 9.6v5.2"/></svg></span>
+        <h3>Public health professional</h3>
+        <p>Workforce data, practical tools and training for the field.</p>
+        <span class="path__go"><span>Go</span> <span class="arw" aria-hidden="true">→</span></span>
+      </a></li>
+      <li class="rv d1"><a class="path" href="#pillars">
+        <span class="path__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20V9.5M19 20V9.5M9 20v-6h6v6M12 3 3.5 8h17Z"/></svg></span>
+        <h3>Policymaker</h3>
+        <p>Proven policies, city ratings and non-partisan evidence.</p>
+        <span class="path__go"><span>Go</span> <span class="arw" aria-hidden="true">→</span></span>
+      </a></li>
+      <li class="rv d2"><a class="path" href="#impact">
+        <span class="path__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.2" r="3.2"/><path d="M2.8 19.4c.5-3.3 3.1-5.3 6.2-5.3s5.7 2 6.2 5.3"/><path d="M16.4 5.6a3 3 0 0 1 0 5.6M18.6 14.6c2 .8 3.2 2.5 3.5 4.8"/></svg></span>
+        <h3>Community leader</h3>
+        <p>Community power building, grants and local partnerships.</p>
+        <span class="path__go"><span>Go</span> <span class="arw" aria-hidden="true">→</span></span>
+      </a></li>
+      <li class="rv d3"><a class="path" href="#evidence">
+        <span class="path__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11l5 5v11H4Z"/><path d="M14.5 4v5.5H20"/><path d="M8 13h7M8 16.5h5"/></svg></span>
+        <h3>Researcher</h3>
+        <p>PH WINS datasets, survey methods and peer-reviewed findings.</p>
+        <span class="path__go"><span>Go</span> <span class="arw" aria-hidden="true">→</span></span>
+      </a></li>
+      <li class="rv d4"><a class="path" href="#press">
+        <span class="path__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5h9l6-3.5v14l-6-3.5h-9Z"/><path d="M6.5 15.5V20h3v-4.5"/></svg></span>
+        <h3>Media</h3>
+        <p>Experts on call, press releases and poll data for reporters.</p>
+        <span class="path__go"><span>Go</span> <span class="arw" aria-hidden="true">→</span></span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 03 RESOURCE FINDER ============ -->
+<section class="sect finder" id="finder" aria-labelledby="finder-h" data-read-section>
+  <div class="finder__pattern para" data-para="0.1" id="finder-pattern" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="finder__in">
+      <p class="eyebrow"><span class="num">03</span> &nbsp;Resource finder</p>
+      <h2 class="h-lg" id="finder-h">What are you looking for?</h2>
+      <p class="lede" style="color:rgba(255,255,255,.86)">Search reports, playbooks, poll data, books, trainings and program pages across the foundation.</p>
+      <form class="searchbar" id="finder-form" role="search" novalidate>
+        <div class="searchbar__field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.6"/><path d="m16.2 16.2 4.3 4.3"/></svg>
+          <label class="sr-only" for="finder-input">Search de Beaumont resources</label>
+          <input id="finder-input" name="q" type="search" placeholder="Try “workforce retention” or “paid sick leave”" autocomplete="off">
+        </div>
+        <button class="btn btn--mint" type="submit">Search <span class="arw" aria-hidden="true">→</span></button>
+      </form>
+      <div class="popular">
+        <span class="popular__lbl">Popular</span>
+        <button class="chip" type="button" data-q="PH WINS 2026 Pulse Check">PH WINS 2026 Pulse Check</button>
+        <button class="chip" type="button" data-q="Workforce retention">Workforce retention</button>
+        <button class="chip" type="button" data-q="CityHealth policy package">CityHealth policy package</button>
+        <button class="chip" type="button" data-q="Public health communication">Communication toolkits</button>
+        <button class="chip" type="button" data-q="Rural health">Rural health</button>
+      </div>
+      <p class="searchstatus" id="search-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PILLARS — checkerboard ============ -->
+<section id="pillars" aria-labelledby="pillars-h" data-read-section>
+  <div class="wrap sect" style="padding-bottom:clamp(28px,4vw,56px)">
+    <div class="sect-head rv">
+      <div>
+        <p class="eyebrow"><span class="num">04</span> &nbsp;Strategy</p>
+        <h2 class="h-lg" id="pillars-h">How we create change</h2>
+        <p class="lede">Four connected levers. Each one is useless alone — together they move a policy from an idea to a healthier street.</p>
+      </div>
+      <a class="textlink" href="#initiatives">See the programs behind them <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <div class="wrap"><div class="checker">
+    <div class="cell cell--text c-purple">
+      <span class="cell__num">01</span>
+      <p class="kicker">Pillar one</p>
+      <h3>Advancing policy</h3>
+      <p>We advance policies that improve community health, so today's decisions keep paying off for the next generation.</p>
+      <a class="textlink" href="#initiatives">Policy work <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+    <div class="cell cell--media frame">
+      <video class="para" data-para="0.14" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+             poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200">
+        <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="cell cell--media frame">
+      <video class="para" data-para="0.14" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+             poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200">
+        <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cell cell--text c-coral">
+      <span class="cell__num">02</span>
+      <p class="kicker">Pillar two</p>
+      <h3>Creating partnerships</h3>
+      <p>We build partnerships — often among unlikely allies — so leaders can reach the goal they already share.</p>
+      <a class="textlink" href="#initiatives">Partnerships <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="cell cell--text c-mint">
+      <span class="cell__num">03</span>
+      <p class="kicker">Pillar three</p>
+      <h3>Strengthening public health</h3>
+      <p>We create practical solutions for the public health system and the people who run it, from data to day-one skills.</p>
+      <a class="textlink" href="#initiatives">Workforce <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+    <div class="cell cell--media frame">
+      <video class="para" data-para="0.14" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+             poster="https://images.pexels.com/videos/30141972/adventist-adventist-health-doctor-nurse-30141972.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200">
+        <source src="https://videos.pexels.com/video-files/30141972/12925676_1920_1080_24fps.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="cell cell--media frame">
+      <video class="para" data-para="0.14" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+             poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200">
+        <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="cell cell--text c-amber">
+      <span class="cell__num">04</span>
+      <p class="kicker">Pillar four</p>
+      <h3>Improving communication</h3>
+      <p>We equip health communicators with research, training and language that actually builds public support.</p>
+      <a class="textlink" href="#initiatives">Communication <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 05 EVIDENCE → ACTION ============ -->
+<section class="sect evidence" id="evidence" aria-labelledby="evidence-h" data-read-section>
+  <div class="wrap ev__grid">
+    <div class="ev__sticky rv">
+      <p class="eyebrow"><span class="num">05</span> &nbsp;Our method</p>
+      <h2 class="h-lg" id="evidence-h">From research to real-world impact</h2>
+      <p class="lede">Evidence only counts when someone can act on it. Every project we fund travels the same four stages.</p>
+      <a class="textlink" href="#initiatives" style="margin-top:8px">See it in practice <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+
+    <ol class="ev__steps" role="list">
+      <li class="evstep rv para" data-para="-0.03">
+        <span class="evstep__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.6" cy="10.6" r="6.4"/><path d="m15.4 15.4 4.4 4.4M8 10.6h5.2"/></svg></span>
+        <div>
+          <p class="evstep__k">Stage 01</p>
+          <h3>Research</h3>
+          <p>We field the questions no one else is asking — starting with the only nationally representative survey of the governmental public health workforce.</p>
+          <p class="evstep__proof"><b>PH WINS</b> — fielded with ASTHO in 2014, 2017, 2021 and 2024.</p>
+        </div>
+      </li>
+      <li class="evstep rv d1 para" data-para="-0.05">
+        <span class="evstep__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2a5.6 5.6 0 0 0-3.3 10.1c.6.5.9 1.1.9 1.8v.6h4.8v-.6c0-.7.3-1.3.9-1.8A5.6 5.6 0 0 0 12 3.2Z"/><path d="M9.6 19h4.8M10.4 21h3.2"/></svg></span>
+        <div>
+          <p class="evstep__k">Stage 02</p>
+          <h3>Insights</h3>
+          <p>Findings are translated into plain language for the people who make decisions — not just for peer reviewers.</p>
+          <p class="evstep__proof"><b>Insights to Action</b> — case studies and how-to guides vetted by the workforce itself.</p>
+        </div>
+      </li>
+      <li class="evstep rv d2 para" data-para="-0.07">
+        <span class="evstep__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.8 3.8 20 9l-9.2 9.2H5.6V13Z"/><path d="m12.4 6.2 5.2 5.2"/></svg></span>
+        <div>
+          <p class="evstep__k">Stage 03</p>
+          <h3>Tools</h3>
+          <p>Playbooks, ratings, message testing and certificate programs — built so a two-person health department can use them on Monday.</p>
+          <p class="evstep__proof"><b>Practical Playbook · BEAM · PHRASES</b> — training and implementation tools.</p>
+        </div>
+      </li>
+      <li class="evstep rv d3 para" data-para="-0.09">
+        <span class="evstep__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5 19.5 4M19.5 4h-6M19.5 4v6"/><path d="M4 12.5v7h7"/></svg></span>
+        <div>
+          <p class="evstep__k">Stage 04</p>
+          <h3>Action</h3>
+          <p>Cities adopt the policy. Departments change how they hire. Communities keep the gain long after the grant closes.</p>
+          <p class="evstep__proof"><b>CityHealth · BUILD</b> — policy adoption and community-led change.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 06 INITIATIVES ============ -->
+<section class="sect" id="initiatives" aria-labelledby="inits-h" data-read-section>
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div>
+        <p class="eyebrow"><span class="num">06</span> &nbsp;Programs</p>
+        <h2 class="h-lg" id="inits-h">Explore our work</h2>
+        <p class="lede">Long-running programs, each with its own community of practice.</p>
+      </div>
+      <a class="textlink" href="#finder">All programs <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="inits__grid deck" data-deck="inits" data-deck-label="Flagship initiatives">
+      <a class="init init--solid rv" href="#finder">
+        <div class="init__head">
+          <span class="init__tag">Workforce data</span>
+          <h3>PH WINS</h3>
+          <p>The Public Health Workforce Interests and Needs Survey — the only nationally representative read on the people who staff state and local health agencies.</p>
+          <span class="init__go">2026 Pulse Check <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+        <div class="init__ph frame">
+          <video class="para" data-para="0.08" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/30141972/adventist-adventist-health-doctor-nurse-30141972.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+            <source src="https://videos.pexels.com/video-files/30141972/12925676_1920_1080_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </a>
+
+      <a class="init init--mint rv d1" href="#people">
+        <div class="init__head">
+          <span class="init__tag">Recognition</span>
+          <h3>40 Under 40 in Public Health</h3>
+          <p>Since 2019, elevating equity-focused, service-oriented leaders under 40 — with a professional development program attached, not just a list.</p>
+          <span class="init__go">Meet the honorees <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+        <div class="init__ph frame">
+          <video class="para" data-para="0.08" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+            <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </a>
+
+      <a class="init rv d2" href="#finder">
+        <div class="init__head">
+          <span class="init__tag">Policy · with Kaiser Permanente</span>
+          <h3>CityHealth</h3>
+          <p>A package of tried-and-tested policies, with annual gold, silver and bronze ratings for the 75 largest U.S. cities.</p>
+          <span class="init__go">See the ratings <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+        <div class="init__ph frame">
+          <video class="para" data-para="0.08" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+            <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </a>
+
+      <a class="init rv" href="#finder">
+        <div class="init__head">
+          <span class="init__tag">Health justice</span>
+          <h3>MADE for Health Justice</h3>
+          <p>Supporting the leaders and organizations closest to the communities most affected by health inequity.</p>
+          <span class="init__go">About MADE <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+        <div class="init__ph frame">
+          <video class="para" data-para="0.08" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+            <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </a>
+
+      <a class="init init--solid rv d1" href="#finder">
+        <div class="init__head">
+          <span class="init__tag">Community-led · 12 funders</span>
+          <h3>BUILD Health Challenge</h3>
+          <p>Bold, Upstream, Integrated, Local, Data-driven. Awards of up to $300,000 over three years for partnerships between health systems, community organizations and health departments.</p>
+          <span class="init__go">How BUILD works <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+        <div class="init__ph frame">
+          <video class="para" data-para="0.08" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+            <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </a>
+
+      <a class="init rv d2" href="#finder">
+        <div class="init__head">
+          <span class="init__tag">Partnerships</span>
+          <h3>Practical Playbook &amp; PHRASES</h3>
+          <p>Implementation tools for collaboration between public health, primary care and other sectors — with the Aspen Institute and Duke University.</p>
+          <span class="init__go">Get the tools <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+        <div class="init__ph frame">
+          <video class="para" data-para="0.08" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900">
+            <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 IMPACT ============ -->
+<section class="sect impact" id="impact" aria-labelledby="impact-h" data-read-section>
+  <div class="impact__pattern para" data-para="0.16" id="impact-pattern" aria-hidden="true"></div>
+  <div class="wrap impact__in">
+    <div class="impact__float frame rv" aria-hidden="true">
+      <video class="para" data-para="0.1" muted loop playsinline preload="none" data-hoverplay
+             poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600">
+        <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="impact__head rv">
+      <p class="eyebrow" style="justify-content:center"><span class="num">07</span> &nbsp;Impact</p>
+      <h2 id="impact-h">These programs come together to create real impact across the country:</h2>
+    </div>
+
+    <ul class="scatter" role="list">
+      <li class="scard rv">
+        <p class="scard__n"><span data-count="75">75</span></p>
+        <p class="scard__l">Largest U.S. cities rated by CityHealth every year on a package of proven health policies.</p>
+        <p class="scard__src">Source — CityHealth</p>
+      </li>
+      <li class="scard rv d1">
+        <p class="scard__n"><span data-count="40">40</span></p>
+        <p class="scard__l">Rising leaders honored each year since 2019 through 40 Under 40 in Public Health.</p>
+        <p class="scard__src">Source — 40 Under 40</p>
+      </li>
+      <li class="scard rv d2">
+        <p class="scard__n">$<span data-count="300">300</span><span class="suf">K</span></p>
+        <p class="scard__l">Maximum BUILD Health Challenge award, over three years, for community-led partnerships.</p>
+        <p class="scard__src">Source — BUILD Health Challenge</p>
+      </li>
+      <li class="scard rv d3">
+        <p class="scard__n"><span data-count="12">12</span></p>
+        <p class="scard__l">Funders behind BUILD, with de Beaumont as both funder and administrative hub.</p>
+        <p class="scard__src">Source — BUILD Health Challenge</p>
+      </li>
+    </ul>
+
+    <figure class="quote rv">
+      <div class="quote__media frame">
+        <video class="para" data-para="0.09" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+               poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200">
+          <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <p class="eyebrow" style="color:rgba(255,255,255,.72)">The finding that changed the conversation</p>
+        <blockquote>Nearly a third of the public health workforce said they planned to leave their organization within a year. More than 40% of them pointed to burnout.</blockquote>
+        <figcaption>
+          <b>PH WINS 2021</b>
+          Public Health Workforce Interests and Needs Survey, fielded with the Association of State and Territorial Health Officials. The data reframed retention as a national infrastructure problem — and became the basis for Insights to Action.
+        </figcaption>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 08 PEOPLE ============ -->
+<section class="sect" id="people" aria-labelledby="people-h" data-read-section>
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div>
+        <p class="eyebrow"><span class="num">08</span> &nbsp;People</p>
+        <h2 class="h-lg" id="people-h">Meet the people strengthening public health</h2>
+        <p class="lede">Practitioners, researchers and rising leaders — the field is a workforce before it is a system.</p>
+      </div>
+      <a class="textlink" href="#footer">Staff &amp; board <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="people__grid deck" data-deck="people" data-deck-label="People">
+      <a class="person rv" href="#footer">
+        <div class="person__ph frame">
+          <video class="para" data-para="0.06" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/30141972/adventist-adventist-health-doctor-nurse-30141972.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800">
+            <source src="https://videos.pexels.com/video-files/30141972/12925676_1920_1080_24fps.mp4" type="video/mp4">
+          </video>
+          <span class="person__badge">Leadership</span>
+        </div>
+        <div class="person__body">
+          <h3>Brian C. Castrucci, DrPH</h3>
+          <p class="person__role">President &amp; Chief Executive Officer</p>
+          <span class="textlink">Read bio <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+      <a class="person rv d1" href="#initiatives">
+        <div class="person__ph frame">
+          <video class="para" data-para="0.06" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800">
+            <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+          <span class="person__badge">40 Under 40</span>
+        </div>
+        <div class="person__body">
+          <h3>Class of 2025 honorees</h3>
+          <p class="person__role">Program managers, epidemiologists, researchers and community engagement leads across 40 organizations.</p>
+          <span class="textlink">Meet the class <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+      <a class="person rv d2" href="#evidence">
+        <div class="person__ph frame">
+          <video class="para" data-para="0.06" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800">
+            <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+          <span class="person__badge">Practitioners</span>
+        </div>
+        <div class="person__body">
+          <h3>The governmental workforce</h3>
+          <p class="person__role">The state and local staff PH WINS is built to listen to — and built for.</p>
+          <span class="textlink">See the findings <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+      <a class="person rv d3" href="#press">
+        <div class="person__ph frame">
+          <video class="para" data-para="0.06" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800">
+            <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+          <span class="person__badge">Experts</span>
+        </div>
+        <div class="person__body">
+          <h3>Our expert network</h3>
+          <p class="person__role">Available to journalists on workforce, policy, communication and community power building.</p>
+          <span class="textlink">Find an expert <span class="arw" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 FEATURE BANNER ============ -->
+<section class="banner" id="press" aria-labelledby="press-h" data-read-section>
+  <div class="wrap"><div class="banner__box">
+  <div class="banner__bg" aria-hidden="true">
+    <video class="para" data-para="0.18" muted loop playsinline preload="none" data-hoverplay
+           poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">
+      <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="banner__veil" aria-hidden="true"></div>
+    <div class="banner__card para" data-para="-0.06">
+      <p class="eyebrow" style="color:rgba(255,255,255,.82)"><span class="num">09</span> &nbsp;For journalists</p>
+      <h2 id="press-h">Need a public health expert?</h2>
+      <p>We answer press queries quickly, on the record, with people who do the work: workforce and retention, city health policy, community power building, health communication and poll interpretation.</p>
+      <a class="btn btn--light" href="#footer">Contact the press team <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 10 NEWS & STORIES ============ -->
+<section class="sect" id="insights" aria-labelledby="insights-h" data-read-section>
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div>
+        <p class="eyebrow"><span class="num">10</span> &nbsp;News &amp; ideas</p>
+        <h2 class="h-lg" id="insights-h">News &amp; stories</h2>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="#finder">See all news</a>
+    </div>
+
+    <div class="news3 deck" data-deck="news" data-deck-label="Latest stories">
+      <a class="post rv" href="#insights">
+        <div class="post__ph frame">
+          <video class="para" data-para="0.07" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/27835009/pexels-photo-27835009.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000">
+            <source src="https://videos.pexels.com/video-files/27835009/12239366_2560_1440_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="post__meta"><span class="tag">Community power</span> <time datetime="2026-08-06">6 Aug 2026</time></div>
+        <h3>Community Power in Practice: Lessons for Rural Health</h3>
+        <p>What it takes to build durable community power in rural places — strategies and anecdotes from the field.</p>
+      </a>
+      <a class="post rv d1" href="#insights">
+        <div class="post__ph frame">
+          <video class="para" data-para="0.07" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/35923202/pexels-photo-35923202.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000">
+            <source src="https://videos.pexels.com/video-files/35923202/15240277_2560_1440_30fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="post__meta"><span class="tag">Policy</span> <time datetime="2026-07-15">15 Jul 2026</time></div>
+        <h3>New roadmap to strengthen local public health and elected official relationships</h3>
+        <p>A toolkit for building trust between health departments and the people who fund them.</p>
+      </a>
+      <a class="post rv d2" href="#insights">
+        <div class="post__ph frame">
+          <video class="para" data-para="0.07" muted loop playsinline preload="none" data-hoverplay aria-hidden="true"
+                 poster="https://images.pexels.com/videos/30141972/adventist-adventist-health-doctor-nurse-30141972.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000">
+            <source src="https://videos.pexels.com/video-files/30141972/12925676_1920_1080_24fps.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="post__meta"><span class="tag">Workforce</span> <time datetime="2026-06-17">17 Jun 2026</time></div>
+        <h3>Moving beyond resilience: rebuilding the public health workforce with intention</h3>
+        <p>Resilience is not a staffing strategy. What the data says agencies should do instead.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 PARTNERS ============ -->
+<section class="sect partners" aria-labelledby="partners-h" data-read-section>
+  <div class="wrap">
+    <h2 id="partners-h">Partners and collaborators</h2>
+    <div class="plogos">
+      <a class="plogo rv" href="#footer">ASTHO<span>PH WINS</span></a>
+      <a class="plogo rv d1" href="#footer">Kaiser Permanente<span>CityHealth</span></a>
+      <a class="plogo rv d2" href="#footer">Aspen Institute<span>PHRASES</span></a>
+      <a class="plogo rv d3" href="#footer">Duke University<span>Practical Playbook</span></a>
+      <a class="plogo rv d4" href="#footer">APHA<span>Healing Through Policy</span></a>
+      <a class="plogo rv" href="#footer">Robert Wood Johnson Foundation<span>BUILD</span></a>
+      <a class="plogo rv d1" href="#footer">Bipartisan Policy Center<span>Public Health Forward</span></a>
+      <a class="plogo rv d2" href="#footer">Results for America<span>Healing Through Policy</span></a>
+      <a class="plogo rv d3" href="#footer">NACCHO<span>Local health departments</span></a>
+      <a class="plogo rv d4" href="#footer">University of Miami<span>BEAM certificate</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 CLOSING IMAGE ============ -->
+<div class="wrap closerwrap"><div class="closer frame" aria-hidden="true">
+  <video class="para" data-para="0.2" muted loop playsinline preload="none" data-hoverplay
+         poster="https://images.pexels.com/videos/35923247/pexels-photo-35923247.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">
+    <source src="https://videos.pexels.com/video-files/35923247/15240258_2560_1440_30fps.mp4" type="video/mp4">
+  </video>
+</div></div>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ftr" id="footer" data-read-section>
+  <div class="wrap">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <img src="data:image/webp;base64,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" alt="de Beaumont Foundation" width="190" height="38">
+        <p>Advancing policy, building partnerships, and strengthening public health to create communities where people can achieve their best possible health.</p>
+        <ul class="socials" role="list">
+          <li><a href="#footer" aria-label="de Beaumont on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9.5 9h3.8v1.7h.1c.5-.9 1.8-1.9 3.6-1.9 3.9 0 4.6 2.5 4.6 5.8V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4Z"/></svg></a></li>
+          <li><a href="#footer" aria-label="de Beaumont on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.2l-7 8 8.3 10h-6.5l-5-6.1-5.8 6.1H1.5l7.5-8.6L1 3h6.7l4.6 5.6Zm-1.1 16h1.8L7.7 4.8H5.8Z"/></svg></a></li>
+          <li><a href="#footer" aria-label="de Beaumont on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6A22 22 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.1v2.3H7.6V13h2.7v8Z"/></svg></a></li>
+          <li><a href="#footer" aria-label="de Beaumont on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg></a></li>
+        </ul>
+      </div>
+
+      <nav class="ftr__col" aria-labelledby="fh-work">
+        <h2 id="fh-work">Our work</h2>
+        <ul role="list">
+          <li><a href="#pillars">Advancing policy</a></li>
+          <li><a href="#pillars">Creating partnerships</a></li>
+          <li><a href="#pillars">Strengthening public health</a></li>
+          <li><a href="#pillars">Improving communication</a></li>
+          <li><a href="#evidence">Evidence to action</a></li>
+        </ul>
+      </nav>
+
+      <nav class="ftr__col" aria-labelledby="fh-prog">
+        <h2 id="fh-prog">Programs</h2>
+        <ul role="list">
+          <li><a href="#initiatives">PH WINS</a></li>
+          <li><a href="#initiatives">40 Under 40</a></li>
+          <li><a href="#initiatives">CityHealth</a></li>
+          <li><a href="#initiatives">MADE for Health Justice</a></li>
+          <li><a href="#initiatives">BUILD Health Challenge</a></li>
+        </ul>
+      </nav>
+
+      <div class="ftr__col">
+        <h2 id="fh-contact">Contact</h2>
+        <address class="ftr__contact">
+          7700 Wisconsin Avenue, Suite 1025<br>
+          Bethesda, MD 20814<br>
+          <a href="tel:+13019615800">301-961-5800</a><br>
+          <a href="mailto:info@debeaumont.org">info@debeaumont.org</a>
+        </address>
+        <ul role="list" style="margin-top:12px">
+          <li><a href="#footer">Jobs</a></li>
+          <li><a href="#footer">Grants policy</a></li>
+        </ul>
+      </div>
+
+      <div class="ftr__nl">
+        <div class="nlcard" id="newsletter" data-read-section>
+          <h2>Newsletter</h2>
+          <p class="h-sm" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700">Get insights that matter to you.</p>
+          <p>Pick your interests — roughly twice a month, unsubscribe in one click.</p>
+          <form id="news-form" novalidate style="margin-top:14px">
+            <div class="field" id="field-email" data-invalid="false">
+              <label for="nl-email">Email address <span aria-hidden="true">*</span></label>
+              <input id="nl-email" name="email" type="email" autocomplete="email" required
+                     aria-describedby="nl-email-hint nl-email-err" placeholder="you@organization.org">
+              <p class="hint" id="nl-email-hint">We never share your address.</p>
+              <p class="err" id="nl-email-err">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.2"/></svg>
+                <span>Enter a valid email address, for example name@organization.org</span>
+              </p>
+            </div>
+            <fieldset>
+              <legend>Interests <span class="hint" style="font-weight:400;display:inline">choose any</span></legend>
+              <div class="interests">
+                <label class="interest"><input type="checkbox" name="interest" value="Workforce"><span>Workforce</span></label>
+                <label class="interest"><input type="checkbox" name="interest" value="Policy"><span>Policy</span></label>
+                <label class="interest"><input type="checkbox" name="interest" value="Partnerships"><span>Partnerships</span></label>
+                <label class="interest"><input type="checkbox" name="interest" value="Communication"><span>Communication</span></label>
+              </div>
+            </fieldset>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+              <button class="btn btn--sm" type="submit">Sign up <span class="arw" aria-hidden="true">→</span></button>
+              <button class="btn btn--ghost btn--sm" type="reset">Clear</button>
+            </div>
+            <p class="formstatus" id="news-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="ftr__mid">
+      <p style="margin:0">Accessibility is built in. Use the <button type="button" class="chip" data-open-a11y style="min-height:38px;padding:6px 14px">accessibility tools <span aria-hidden="true">↘</span></button> to switch to black &amp; white, listen to this page, or enlarge the text.</p>
+      <nav class="ftr__legal" aria-label="Legal">
+        <a href="#footer">Privacy policy</a>
+        <a href="#footer">Terms of use</a>
+        <a href="#footer">Accessibility statement</a>
+        <a href="#footer">Sitemap</a>
+      </nav>
+    </div>
+
+    <div class="ftr__mid" style="border-bottom:0">
+      <p class="byline">
+        <span>Website design by</span>
+        <a class="byline__logo" href="https://www.compunneldigital.com" rel="noopener" aria-label="Compunnel Digital">
+          <svg viewBox="0 0 210 34" role="img" aria-label="Compunnel Digital">
+            <defs><linearGradient id="cd-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FA0FF"/><stop offset="1" stop-color="#5A61F6"/></linearGradient></defs>
+            <rect x="0" y="3" width="28" height="28" rx="9" fill="url(#cd-g)"/>
+            <path d="M20.5 12.4a6.6 6.6 0 1 0 0 9.2" fill="none" stroke="#0B0A14" stroke-width="3" stroke-linecap="round"/>
+            <text x="38" y="17.5" font-family="Bricolage Grotesque, sans-serif" font-size="15" font-weight="800" fill="currentColor" letter-spacing="-0.3">Compunnel</text>
+            <text x="38" y="29" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="500" fill="currentColor" opacity=".78" letter-spacing="3.4">DIGITAL</text>
+          </svg>
+        </a>
+      </p>
+      <p style="margin:0">Built to WCAG 2.2 level AA.</p>
+    </div>
+
+    <div class="wordmark" aria-hidden="true">
+      <svg viewBox="0 0 1000 150" preserveAspectRatio="none" focusable="false">
+        <text x="0" y="120" textLength="1000" lengthAdjust="spacingAndGlyphs" font-size="150">de Beaumont</text>
+      </svg>
+    </div>
+
+    <div class="ftr__base">
+      <p style="margin:0">© <span id="year">2026</span> de Beaumont Foundation. Inciting action. Driving change.</p>
+      <p style="margin:0">Concept homepage — content sourced from debeaumont.org.</p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#page-shell -->
+
+<!-- ============ ACCESSIBILITY WIDGET ============ -->
+<button class="a11y-fab" id="a11y-fab" type="button" aria-expanded="false" aria-controls="a11y-panel"
+        aria-label="Accessibility tools — black &amp; white, listen to page, text size">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="12" cy="4.1" r="2.1"/>
+    <path d="M20.4 7.6c.2.8-.3 1.6-1.1 1.8l-4.1.9v2.4l2.6 6.6a1.5 1.5 0 0 1-2.8 1.1L12 15.6l-3 4.8a1.5 1.5 0 0 1-2.8-1.1l2.6-6.6v-2.4l-4.1-.9a1.5 1.5 0 1 1 .6-2.9L10 7.6h4l4.6-1.1c.8-.2 1.6.3 1.8 1.1Z"/>
+  </svg>
+</button>
+
+<div class="a11y-panel" id="a11y-panel" data-open="false" role="dialog" aria-modal="false" aria-labelledby="a11y-title">
+  <div class="a11y-panel__head">
+    <h2 id="a11y-title">Accessibility tools</h2>
+    <button class="icon-btn" type="button" id="a11y-close" aria-label="Close accessibility tools"
+            style="background:var(--bg-2);border-color:var(--line);color:var(--text);width:40px;height:40px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <p class="a11y-panel__sub">Adjust how this page looks and sounds. Settings apply to this visit.</p>
+
+  <div class="a11y-group">
+    <h3>Listen to this page</h3>
+    <div class="a11y-reader">
+      <button class="btn btn--sm" type="button" id="tts-play" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" id="tts-icon"><path d="M8 5.2 19 12 8 18.8Z"/></svg>
+        <span id="tts-label">Play</span>
+      </button>
+      <button class="btn btn--ghost btn--sm" type="button" id="tts-stop">Stop</button>
+    </div>
+    <div class="rate">
+      <label for="tts-rate">Speed</label>
+      <input id="tts-rate" type="range" min="0.6" max="1.6" step="0.1" value="1">
+      <output id="tts-rate-out">1.0×</output>
+    </div>
+    <p class="readstatus" id="tts-status" role="status" aria-live="polite">Not playing.</p>
+  </div>
+
+  <div class="a11y-group">
+    <h3>Colour &amp; contrast</h3>
+    <div class="toggles">
+      <button class="tgl" type="button" data-a11y="gray" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" fill="currentColor" stroke="none"/></svg>
+        Black &amp; white <span class="tgl__state">OFF</span>
+      </button>
+      <button class="tgl" type="button" data-a11y="contrast" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 6.2a5.8 5.8 0 0 1 0 11.6Z" fill="currentColor" stroke="none"/></svg>
+        High contrast <span class="tgl__state">OFF</span>
+      </button>
+      <button class="tgl" type="button" data-a11y="links" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M10 13.5a3.6 3.6 0 0 0 5.2.3l2.6-2.6a3.7 3.7 0 0 0-5.2-5.2l-1.4 1.4"/><path d="M14 10.5a3.6 3.6 0 0 0-5.2-.3l-2.6 2.6a3.7 3.7 0 0 0 5.2 5.2l1.4-1.4"/></svg>
+        Underline links <span class="tgl__state">OFF</span>
+      </button>
+      <button class="tgl" type="button" data-a11y="motion" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+        Pause motion <span class="tgl__state">OFF</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="a11y-group">
+    <h3>Reading</h3>
+    <div class="toggles">
+      <button class="tgl" type="button" data-a11y="text" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M4 7V5.5h9V7M8.5 5.5V19M6.5 19h4"/><path d="M14.5 12.5V11h5.5v1.5M17.2 11v8M15.5 19h3.4"/></svg>
+        Bigger text <span class="tgl__state" id="text-state">100%</span>
+      </button>
+      <button class="tgl" type="button" data-a11y="space" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        Letter spacing <span class="tgl__state">OFF</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="a11y-foot">
+    <button class="btn btn--ghost btn--sm" type="button" id="a11y-reset" style="flex:1">Reset all settings</button>
+  </div>
+</div>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<div class="toast" id="toast" data-show="false" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+  <span id="toast-text">Done</span>
+</div>
+
+<p class="sr-only" id="live" role="status" aria-live="polite"></p>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var live = document.getElementById('live');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function say(msg){ if(live){ live.textContent = ''; setTimeout(function(){ live.textContent = msg; }, 60); } }
+
+  /* ---------- toast ---------- */
+  var toast = document.getElementById('toast'), toastText = document.getElementById('toast-text'), toastT;
+  function showToast(msg){
+    toastText.textContent = msg; toast.setAttribute('data-show','true');
+    clearTimeout(toastT); toastT = setTimeout(function(){ toast.setAttribute('data-show','false'); }, 4200);
+  }
+
+  /* ---------- 1. THEME (auto by local time + manual override) ---------- */
+  var themeBtns = Array.prototype.slice.call(document.querySelectorAll('[data-theme-btn]'));
+  var mode = 'auto';
+  function timeTheme(){
+    var h = new Date().getHours();
+    return (h >= 6 && h < 19) ? 'light' : 'dark';   /* morning→before sunset = light */
+  }
+  function applyTheme(){
+    var t = (mode === 'auto') ? timeTheme() : mode;
+    root.setAttribute('data-theme', t);
+    root.setAttribute('data-theme-mode', mode);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0B0A14' : '#1B1044');
+    themeBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.themeBtn === mode)); });
+    var cyc = document.getElementById('theme-cycle');
+    if (cyc){
+      var next = mode === 'light' ? 'dark' : (mode === 'dark' ? 'automatic' : 'light');
+      cyc.setAttribute('aria-label', 'Theme: ' + (mode === 'auto' ? 'automatic' : mode) + '. Activate to switch to ' + next + '.');
+      document.getElementById('theme-cycle-icon').innerHTML =
+        mode === 'light' ? '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>'
+        : mode === 'dark' ? '<path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"/>'
+        : '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>';
+    }
+  }
+  themeBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      mode = b.dataset.themeBtn; applyTheme();
+      say(mode === 'auto'
+        ? 'Theme set to automatic. Currently ' + timeTheme() + ', based on the time on your device.'
+        : 'Theme set to ' + mode + '.');
+    });
+  });
+  var cycleBtn = document.getElementById('theme-cycle');
+  if (cycleBtn) cycleBtn.addEventListener('click', function(){
+    mode = mode === 'light' ? 'dark' : (mode === 'dark' ? 'auto' : 'light');
+    applyTheme();
+    say(mode === 'auto' ? 'Theme set to automatic, currently ' + timeTheme() + '.' : 'Theme set to ' + mode + '.');
+  });
+  applyTheme();
+  setInterval(function(){ if (mode === 'auto') applyTheme(); }, 60000);
+
+  /* ---------- 2. MOBILE DRAWER ---------- */
+  var burger = document.getElementById('burger'), drawer = document.getElementById('drawer'),
+      dClose = document.getElementById('drawer-close'), lastFocus = null;
+  function openDrawer(){
+    lastFocus = document.activeElement;
+    drawer.setAttribute('data-open','true'); burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ dClose.focus(); }, 80);
+  }
+  function closeDrawer(){
+    drawer.setAttribute('data-open','false'); burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = ''; if (lastFocus) lastFocus.focus();
+  }
+  if (burger){
+    burger.addEventListener('click', openDrawer);
+    dClose.addEventListener('click', closeDrawer);
+    drawer.addEventListener('click', function(e){ if (e.target.closest('[data-drawer-link]')) closeDrawer(); });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && drawer.getAttribute('data-open') === 'true') closeDrawer();
+    });
+    drawer.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ closeDrawer(); return; }
+      if (e.key !== 'Tab') return;
+      var f = drawer.querySelectorAll('a[href], button:not([disabled])');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length-1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    });
+  }
+
+  /* ---------- 3. SCROLL PROGRESS + BACK TO TOP ---------- */
+  var bar = document.getElementById('progress-bar'), totop = document.getElementById('totop'), ticking = false;
+  function onScroll(){
+    var st = window.scrollY || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
+    totop.setAttribute('data-show', String(st > 700));
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+  onScroll();
+  totop.addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior: root.classList.contains('no-motion') ? 'auto' : 'smooth' });
+    var tp=document.getElementById('top'); if(tp){ tp.setAttribute('tabindex','-1'); tp.focus({preventScroll:true}); } say('Back to top of page.');
+  });
+
+  /* ---------- 4. REVEAL ON SCROLL ---------- */
+  var revealEls = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- 5. COUNT-UP STATS ---------- */
+  function countUp(el){
+    var target = parseFloat(el.dataset.count), dur = 1500, t0 = null;
+    if (root.classList.contains('no-motion') || reduce.matches){ el.textContent = target; return; }
+    function tick(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var counters = document.querySelectorAll('[data-count]');
+  Array.prototype.forEach.call(counters, function(c){ c.textContent = '0'; });
+  setTimeout(function(){ Array.prototype.forEach.call(counters, function(c){ if (c.textContent === '0') c.textContent = c.dataset.count; }); }, 4000);
+  if ('IntersectionObserver' in window){
+    var cio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } });
+    }, {threshold:0.5});
+    counters.forEach(function(c){ cio.observe(c); });
+  } else { counters.forEach(countUp); }
+
+  /* ---------- 6. EVIDENCE RAIL ---------- */
+  var rail = document.getElementById('rail'), fill = document.getElementById('rail-fill');
+  if (rail && 'IntersectionObserver' in window){
+    var steps = rail.querySelectorAll('[data-step]');
+    var rio = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting){
+          fill.style.width = '100%';
+          steps.forEach(function(s, i){ setTimeout(function(){ s.classList.add('on'); }, i * 220); });
+          rio.disconnect();
+        }
+      });
+    }, {threshold:0.35});
+    rio.observe(rail);
+  }
+
+  /* ---------- 7. VIDEOS: hero control + hover-play tiles ---------- */
+  var hero = document.getElementById('hero-video'),
+      hBtn = document.getElementById('hero-toggle'),
+      hTxt = document.getElementById('hero-toggle-text'),
+      hIco = document.getElementById('hero-toggle-icon');
+  var ICON_PAUSE = '<path d="M8 5h3v14H8zM13 5h3v14h-3z"/>', ICON_PLAY = '<path d="M8 5.2 19 12 8 18.8Z"/>';
+  function setHero(playing){
+    if (!hero) return;
+    if (playing){ var p = hero.play(); if (p && p.catch) p.catch(function(){}); }
+    else hero.pause();
+    hBtn.setAttribute('aria-pressed', String(!playing));
+    hTxt.textContent = playing ? 'Pause background video' : 'Play background video';
+    hIco.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+  }
+  if (hBtn) hBtn.addEventListener('click', function(){ setHero(hero.paused); });
+  if (hero && reduce.matches) setHero(false);
+
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('video[data-hoverplay]'));
+  function tilePlay(v){ if (root.classList.contains('no-motion') || reduce.matches) return; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  function tileStop(v){ try{ v.pause(); }catch(e){} }
+  tiles.forEach(function(v){
+    var host = v.closest('a, figure, .story__media') || v.parentElement;
+    ['mouseenter','focusin'].forEach(function(ev){ host.addEventListener(ev, function(){ tilePlay(v); }); });
+    ['mouseleave','focusout'].forEach(function(ev){ host.addEventListener(ev, function(){ tileStop(v); }); });
+  });
+  /* on touch devices, autoplay the tile that is centred in view */
+  if (window.matchMedia('(hover: none)').matches && 'IntersectionObserver' in window){
+    var tio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) tilePlay(e.target); else tileStop(e.target); });
+    }, {threshold:0.62});
+    tiles.forEach(function(v){ tio.observe(v); });
+  }
+
+  /* ---------- 8. SEARCH ---------- */
+  var sForm = document.getElementById('finder-form'),
+      sInput = document.getElementById('finder-input'),
+      sStat = document.getElementById('search-status');
+  function runSearch(q){
+    q = (q || '').trim();
+    if (!q){ sStat.textContent = 'Type a word or choose a popular search to begin.'; sInput.focus(); return; }
+    sStat.textContent = 'Searching for “' + q + '” — 0 results on this demo page. On the live site this opens the resource library.';
+    say('Search submitted for ' + q);
+  }
+  if (sForm){
+    sForm.addEventListener('submit', function(e){ e.preventDefault(); runSearch(sInput.value); });
+    document.querySelectorAll('[data-q]').forEach(function(c){
+      c.addEventListener('click', function(){ sInput.value = c.dataset.q; runSearch(c.dataset.q); });
+    });
+  }
+
+  /* ---------- 9. NEWSLETTER ---------- */
+  var nForm = document.getElementById('news-form'),
+      nEmail = document.getElementById('nl-email'),
+      nField = document.getElementById('field-email'),
+      nStat = document.getElementById('news-status');
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  if (nForm){
+    nForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!validEmail(nEmail.value.trim())){
+        nField.setAttribute('data-invalid','true');
+        nEmail.setAttribute('aria-invalid','true');
+        nStat.textContent = ''; nStat.removeAttribute('data-state');
+        nEmail.focus();
+        say('There is a problem: enter a valid email address.');
+        return;
+      }
+      nField.setAttribute('data-invalid','false');
+      nEmail.removeAttribute('aria-invalid');
+      var picked = Array.prototype.slice.call(nForm.querySelectorAll('input[name="interest"]:checked')).map(function(i){ return i.value; });
+      nStat.setAttribute('data-state','ok');
+      nStat.textContent = picked.length
+        ? 'Subscribed. You will receive updates on ' + picked.join(', ') + '.'
+        : 'Subscribed. You will receive our general updates — you can add interests any time.';
+      showToast('You are subscribed. Check your inbox to confirm.');
+      nForm.reset();
+    });
+    nEmail.addEventListener('input', function(){
+      if (nField.getAttribute('data-invalid') === 'true' && validEmail(nEmail.value.trim())){
+        nField.setAttribute('data-invalid','false'); nEmail.removeAttribute('aria-invalid');
+      }
+    });
+    nForm.addEventListener('reset', function(){
+      nField.setAttribute('data-invalid','false'); nStat.textContent = ''; nStat.removeAttribute('data-state');
+    });
+  }
+
+  /* ---------- 10. MOBILE CARD DECKS (play-card stack) ---------- */
+  var mq = window.matchMedia('(max-width: 820px)');
+  var decks = Array.prototype.slice.call(document.querySelectorAll('[data-deck]')).map(function(el){
+    var cards = Array.prototype.slice.call(el.children);
+    var ui = document.createElement('div');
+    ui.className = 'deck-ui';
+    ui.innerHTML =
+      '<div class="deck-ui__dots" role="tablist" aria-label="' + el.dataset.deckLabel + ' — choose a card"></div>' +
+      '<span class="deck-ui__count"></span>' +
+      '<div class="deck-ui__nav">' +
+        '<button type="button" data-prev aria-label="Previous card"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+        '<button type="button" data-next aria-label="Next card"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>' +
+      '</div>' +
+      '<button class="btn btn--ghost btn--sm" type="button" data-list style="min-height:44px">Show all</button>';
+    el.parentNode.insertBefore(ui, el.nextSibling);
+    var dots = ui.querySelector('.deck-ui__dots');
+    cards.forEach(function(c, i){
+      var d = document.createElement('button');
+      d.type = 'button'; d.setAttribute('aria-label', 'Card ' + (i+1) + ' of ' + cards.length);
+      d.addEventListener('click', function(){ go(i); });
+      dots.appendChild(d);
+    });
+    var idx = 0, listMode = false;
+    function render(){
+      var n = cards.length;
+      cards.forEach(function(c, i){
+        var rel = (i - idx + n) % n;
+        c.setAttribute('data-pos', rel > 3 ? 'hidden' : String(rel));
+        var interactive = listMode || rel === 0;
+        c.setAttribute('aria-hidden', String(!interactive));
+        if (c.tagName === 'A') c.setAttribute('tabindex', interactive ? '0' : '-1');
+      });
+      Array.prototype.slice.call(dots.children).forEach(function(d, i){ d.setAttribute('aria-current', String(i === idx)); });
+      ui.querySelector('.deck-ui__count').textContent = (idx + 1) + ' / ' + cards.length;
+    }
+    function go(i, dir){
+      var n = cards.length;
+      if (dir && !root.classList.contains('no-motion')){
+        el.setAttribute('data-anim', dir);
+        setTimeout(function(){ el.removeAttribute('data-anim'); idx = (i + n) % n; render(); }, 260);
+      } else { idx = (i + n) % n; render(); }
+      say('Showing card ' + (((i % n) + n) % n + 1) + ' of ' + n);
+    }
+    ui.querySelector('[data-prev]').addEventListener('click', function(){ go(idx - 1, 'right'); });
+    ui.querySelector('[data-next]').addEventListener('click', function(){ go(idx + 1, 'left'); });
+    var listBtn = ui.querySelector('[data-list]');
+    listBtn.addEventListener('click', function(){
+      listMode = !listMode;
+      el.classList.toggle('is-list', listMode);
+      listBtn.textContent = listMode ? 'Stack cards' : 'Show all';
+      render();
+      say(listMode ? 'Showing all cards as a list.' : 'Showing cards as a stack.');
+    });
+    /* swipe */
+    var x0 = null, y0 = null;
+    el.addEventListener('pointerdown', function(e){ if (!mq.matches || listMode) return; x0 = e.clientX; y0 = e.clientY; });
+    el.addEventListener('pointerup', function(e){
+      if (x0 === null) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) go(idx + (dx < 0 ? 1 : -1), dx < 0 ? 'left' : 'right');
+    });
+    el.addEventListener('keydown', function(e){
+      if (!mq.matches || listMode) return;
+      if (e.key === 'ArrowRight'){ e.preventDefault(); go(idx + 1, 'left'); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); go(idx - 1, 'right'); }
+    });
+    return {
+      on: function(){
+        el.setAttribute('role','group');
+        el.setAttribute('aria-roledescription','card deck');
+        el.setAttribute('aria-label', el.dataset.deckLabel + ' — swipe or use the arrows');
+        ui.style.display = ''; render();
+      },
+      off: function(){
+        ui.style.display = 'none';
+        el.removeAttribute('role'); el.removeAttribute('aria-roledescription'); el.removeAttribute('aria-label');
+        cards.forEach(function(c){ c.removeAttribute('data-pos'); c.removeAttribute('aria-hidden'); c.removeAttribute('tabindex'); });
+        el.classList.remove('is-list'); listMode = false; listBtn.textContent = 'Show all';
+      }
+    };
+  });
+  function syncDecks(){ decks.forEach(function(d){ mq.matches ? d.on() : d.off(); }); }
+  if (mq.addEventListener) mq.addEventListener('change', syncDecks); else mq.addListener(syncDecks);
+  syncDecks();
+
+  /* ---------- 11. ACCESSIBILITY PANEL ---------- */
+  var fab = document.getElementById('a11y-fab'), panel = document.getElementById('a11y-panel'),
+      pClose = document.getElementById('a11y-close');
+  function openPanel(){ panel.setAttribute('data-open','true'); fab.setAttribute('aria-expanded','true'); pClose.focus(); }
+  function closePanel(){ panel.setAttribute('data-open','false'); fab.setAttribute('aria-expanded','false'); fab.focus(); }
+  fab.addEventListener('click', function(){ panel.getAttribute('data-open') === 'true' ? closePanel() : openPanel(); });
+  pClose.addEventListener('click', closePanel);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && panel.getAttribute('data-open') === 'true') closePanel(); });
+  document.addEventListener('click', function(e){
+    if (panel.getAttribute('data-open') !== 'true') return;
+    if (!panel.contains(e.target) && !fab.contains(e.target) && !e.target.closest('[data-open-a11y]')) closePanel();
+  });
+  document.querySelectorAll('[data-open-a11y]').forEach(function(b){ b.addEventListener('click', openPanel); });
+
+  var textStep = 0;
+  var actions = {
+    gray:     function(on){ root.classList.toggle('a11y-gray', on); return on ? 'Black and white mode on.' : 'Colour restored.'; },
+    contrast: function(on){ root.classList.toggle('a11y-contrast', on); return on ? 'High contrast on.' : 'High contrast off.'; },
+    links:    function(on){ root.classList.toggle('a11y-links', on); return on ? 'Links underlined.' : 'Link underlines off.'; },
+    motion:   function(on){
+      root.classList.toggle('no-motion', on);
+      if (on){ tiles.forEach(tileStop); if (hero) setHero(false); paraOff(); }
+      else paraUpdate();
+      morphUpdate();
+      return on ? 'Motion paused.' : 'Motion resumed.';
+    },
+    space:    function(on){ root.classList.toggle('a11y-space', on); return on ? 'Extra letter and line spacing on.' : 'Spacing reset.'; }
+  };
+  document.querySelectorAll('[data-a11y]').forEach(function(btn){
+    var key = btn.dataset.a11y;
+    btn.addEventListener('click', function(){
+      if (key === 'text'){
+        textStep = (textStep + 1) % 3;
+        root.classList.remove('fs-1','fs-2');
+        if (textStep) root.classList.add('fs-' + textStep);
+        var pct = ['100%','112%','125%'][textStep];
+        document.getElementById('text-state').textContent = pct;
+        btn.setAttribute('aria-pressed', String(textStep > 0));
+        say('Text size ' + pct + '.');
+        return;
+      }
+      var on = btn.getAttribute('aria-pressed') !== 'true';
+      btn.setAttribute('aria-pressed', String(on));
+      var st = btn.querySelector('.tgl__state'); if (st) st.textContent = on ? 'ON' : 'OFF';
+      say(actions[key](on));
+    });
+  });
+  document.getElementById('a11y-reset').addEventListener('click', function(){
+    root.classList.remove('a11y-gray','a11y-contrast','a11y-links','no-motion','a11y-space','fs-1','fs-2');
+    textStep = 0; document.getElementById('text-state').textContent = '100%';
+    document.querySelectorAll('[data-a11y]').forEach(function(b){
+      b.setAttribute('aria-pressed','false');
+      var st = b.querySelector('.tgl__state'); if (st && b.dataset.a11y !== 'text') st.textContent = 'OFF';
+    });
+    stopTTS();
+    showToast('Accessibility settings reset.');
+    say('All accessibility settings reset.');
+  });
+  if (reduce.matches){
+    root.classList.add('no-motion');
+    var mBtn = document.querySelector('[data-a11y="motion"]');
+    if (mBtn){ mBtn.setAttribute('aria-pressed','true'); mBtn.querySelector('.tgl__state').textContent = 'ON'; }
+  }
+
+  /* ---------- 12. TEXT TO SPEECH ---------- */
+  var synth = window.speechSynthesis;
+  var ttsPlay = document.getElementById('tts-play'), ttsStopBtn = document.getElementById('tts-stop'),
+      ttsLabel = document.getElementById('tts-label'), ttsIcon = document.getElementById('tts-icon'),
+      ttsStatus = document.getElementById('tts-status'), ttsRate = document.getElementById('tts-rate'),
+      ttsRateOut = document.getElementById('tts-rate-out');
+  var queue = [], qi = 0, speaking = false;
+
+  if (!synth){
+    ttsStatus.textContent = 'Your browser does not support reading aloud. Try Chrome, Edge or Safari.';
+    ttsPlay.disabled = true; ttsStopBtn.disabled = true;
+  }
+  function buildQueue(){
+    var out = [], seen = {};
+    document.querySelectorAll('[data-read-section]').forEach(function(sec){
+      sec.querySelectorAll('h1, h2, h3, p, blockquote, figcaption, address').forEach(function(el){
+        if (el.closest('.sr-only, .skips, .a11y-panel, .eyebrow, [aria-hidden="true"]')) return;
+        if (el.classList.contains('sr-only') || el.classList.contains('eyebrow') ||
+            el.classList.contains('stat__src') || el.classList.contains('hint') ||
+            el.classList.contains('readstatus') || el.classList.contains('formstatus')) return;
+        if (!el.offsetParent && el.tagName !== 'BLOCKQUOTE') return;
+        var t = (el.textContent || '').replace(/\s+/g,' ').trim();
+        if (t.length < 3 || seen[t]) return;
+        seen[t] = 1;
+        out.push({ el: el, text: t });
+      });
+    });
+    return out;
+  }
+  function clearHighlight(){ document.querySelectorAll('.tts-active').forEach(function(e){ e.classList.remove('tts-active'); }); }
+  function setPlayUI(isPlaying){
+    ttsPlay.setAttribute('aria-pressed', String(isPlaying));
+    ttsLabel.textContent = isPlaying ? 'Pause' : (qi > 0 && qi < queue.length ? 'Resume' : 'Play');
+    ttsIcon.innerHTML = isPlaying ? '<path d="M8 5h3v14H8zM13 5h3v14h-3z"/>' : '<path d="M8 5.2 19 12 8 18.8Z"/>';
+  }
+  function speakNext(){
+    if (qi >= queue.length){ stopTTS(true); ttsStatus.textContent = 'Finished reading the page.'; return; }
+    var item = queue[qi];
+    clearHighlight(); item.el.classList.add('tts-active');
+    if (!root.classList.contains('no-motion')) item.el.scrollIntoView({ block:'center', behavior:'smooth' });
+    else item.el.scrollIntoView({ block:'center' });
+    ttsStatus.textContent = 'Reading part ' + (qi + 1) + ' of ' + queue.length + '.';
+    var u = new SpeechSynthesisUtterance(item.text);
+    u.rate = parseFloat(ttsRate.value); u.lang = 'en-US';
+    u.onend = function(){ if (speaking){ qi++; speakNext(); } };
+    u.onerror = function(){ if (speaking){ qi++; speakNext(); } };
+    synth.speak(u);
+  }
+  function startTTS(){
+    if (!synth) return;
+    if (!queue.length || qi >= queue.length){ queue = buildQueue(); qi = 0; }
+    speaking = true; setPlayUI(true); speakNext();
+    say('Reading the page aloud.');
+  }
+  function pauseTTS(){ if (!synth) return; speaking = false; synth.cancel(); setPlayUI(false); ttsStatus.textContent = 'Paused at part ' + (qi + 1) + '.'; }
+  function stopTTS(finished){
+    if (!synth) return;
+    speaking = false; synth.cancel(); qi = 0; queue = [];
+    clearHighlight(); setPlayUI(false);
+    if (!finished) ttsStatus.textContent = 'Not playing.';
+  }
+  if (synth){
+    ttsPlay.addEventListener('click', function(){ speaking ? pauseTTS() : startTTS(); });
+    ttsStopBtn.addEventListener('click', function(){ stopTTS(); say('Stopped reading.'); });
+    ttsRate.addEventListener('input', function(){
+      ttsRateOut.textContent = parseFloat(ttsRate.value).toFixed(1) + '×';
+      if (speaking){ synth.cancel(); speakNext(); }
+    });
+    window.addEventListener('beforeunload', function(){ synth.cancel(); });
+  }
+
+
+  /* ---------- 12b. PARALLAX ---------- */
+  var paraEls = Array.prototype.slice.call(document.querySelectorAll('[data-para]')).map(function(el){
+    return { el: el, speed: parseFloat(el.dataset.para) || 0.12, framed: !!el.closest('.frame, .hero__bg, .banner__bg, .closer') };
+  });
+  var paraTick = false;
+  function paraOff(){ paraEls.forEach(function(o){ o.el.style.transform = ''; }); }
+  function paraUpdate(){
+    paraTick = false;
+    if (root.classList.contains('no-motion') || reduce.matches) return;
+    var vh = window.innerHeight, mid = vh / 2;
+    for (var i = 0; i < paraEls.length; i++){
+      var o = paraEls[i], r = o.el.getBoundingClientRect();
+      if (r.bottom < -260 || r.top > vh + 260) continue;
+      var d = (r.top + r.height / 2) - mid;
+      var y = -d * o.speed;
+      var cap = o.framed ? Math.max(30, r.height * 0.10) : 110;
+      if (y > cap) y = cap; else if (y < -cap) y = -cap;
+      o.el.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+    }
+  }
+  /* one hero tile grows and lands under section 02 as you scroll */
+  var morph = document.getElementById('morph'),
+      mFrom = document.getElementById('morph-from'),
+      mTo   = document.getElementById('morph-to');
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function morphUpdate(){
+    if (!morph || !mFrom || !mTo) return;
+    var f = mFrom.getBoundingClientRect(), t = mTo.getBoundingClientRect(), vh = window.innerHeight;
+    if (!f.width && !t.width){ morph.style.opacity = '0'; return; }
+    var span = vh - vh * 0.52;
+    var p = span > 0 ? (vh - t.top) / span : 1;
+    p = p < 0 ? 0 : (p > 1 ? 1 : p);
+    if (root.classList.contains('no-motion') || reduce.matches) p = p >= 1 ? 1 : 0;
+    else p = p * p * (3 - 2 * p);                       /* ease in-out */
+    morph.style.opacity = '1';
+    morph.style.left   = lerp(f.left,   t.left,   p) + 'px';
+    morph.style.top    = lerp(f.top,    t.top,    p) + 'px';
+    morph.style.width  = lerp(f.width,  t.width,  p) + 'px';
+    morph.style.height = lerp(f.height, t.height, p) + 'px';
+    mFrom.style.opacity = p > 0.04 ? '1' : '0';
+    mTo.style.opacity = p > 0.94 ? '0' : '1';
+    var v = morph.querySelector('video');
+    if (v && p > 0.02 && v.paused && !root.classList.contains('no-motion') && !reduce.matches){
+      var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+    }
+  }
+  function paraRequest(){ if (!paraTick){ paraTick = true; requestAnimationFrame(function(){ paraUpdate(); morphUpdate(); }); } }
+  window.addEventListener('scroll', paraRequest, {passive:true});
+  window.addEventListener('resize', paraRequest);
+  paraUpdate(); morphUpdate();
+  window.addEventListener("load", morphUpdate);
+
+  /* ---------- 13. MISC ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: root.classList.contains('no-motion') ? 'auto' : 'smooth', block:'start' });
+      if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex','-1');
+      setTimeout(function(){ t.focus({preventScroll:true}); }, 420);
+      history.replaceState(null, '', id);
+    });
+  });
+})();
+</script>
+<style id="pattern-assets">
+:root{ --pattern:url("data:image/png;base64,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"); }
+#impact-pattern,#finder-pattern{
+  -webkit-mask-image:var(--pattern); mask-image:var(--pattern);
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+}
+#impact-pattern{ background-color:var(--p-500); opacity:.5; mix-blend-mode:multiply;
+  -webkit-mask-size:min(30vw, 340px) auto; mask-size:min(30vw, 340px) auto;
+  -webkit-mask-position:right -70px top 42%; mask-position:right -70px top 42%; }
+html[data-theme="dark"] #impact-pattern{ opacity:.3; mix-blend-mode:screen; }
+@media (max-width:820px){ #impact-pattern{ -webkit-mask-size:62vw auto; mask-size:62vw auto;
+  -webkit-mask-position:right -40px bottom 10px; mask-position:right -40px bottom 10px; } }
+html[data-theme="dark"] #impact-pattern{ background-color:var(--p-500); opacity:.5; }
+#finder-pattern{ background-color:var(--p-500); opacity:.7;
+  -webkit-mask-size:auto 118%; mask-size:auto 118%;
+  -webkit-mask-position:right -40px bottom -30px; mask-position:right -40px bottom -30px; }
+</style>
+</body>
+</html>
